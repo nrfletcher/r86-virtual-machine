@@ -1,0 +1,9 @@
+tools we want to build and their purpose:
+
+* toy language compiler (this will take our toy code and translate it into our toy assembly)
+
+* toy assembler (this will take our toy assembly and translate it into a toy ISA)
+
+* toy virtual machine (this will take our toy ISA and actually run this code)
+
+* create shell commands for all this so it is easy and fluent to do each step (or multiple steps at once)

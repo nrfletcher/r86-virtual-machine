@@ -1,0 +1,8 @@
+General outline of compiler steps to be taken:
+* Build a lexer (tokenizer)
+* Build a parser (AST)
+* Semantic analysis
+* Intermediate code generation
+* Code generation (to either x86 or toyasm?)
+* Assembly output
+* Maybe linking?
