@@ -8,3 +8,5 @@ Steps to take:
 Additional (maybe do?):
 - Create simple debugging tool
 - Look to extend toy ISA and add additional features
+
+https://researcher111.github.io/uva-cso1-F23-DG/syllabus.html
