@@ -5,4 +5,4 @@ General outline of compiler steps to be taken:
 * Intermediate code generation
 * Code generation (to either x86 or toyasm?)
 * Assembly output
-* Maybe linking?
+* Maybe linking? (probably too in depth)
