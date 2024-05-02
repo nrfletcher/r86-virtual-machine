@@ -1,0 +1,2 @@
+This is after dup2
+This is after close
