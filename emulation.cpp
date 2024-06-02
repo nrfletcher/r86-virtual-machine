@@ -9,5 +9,5 @@ int main() {
 }
 
 int generator(int a, int b) {
-	return a + b;
+	return b + a;
 }
