@@ -4,4 +4,4 @@ A toy simulation of a full language execution stack:
 * Compiling (syntax tree)
 * Assembling (assembly)
 * Linking (object files)
-* Execution (machine code)
+* Execution (machine code) on an OOO processor
