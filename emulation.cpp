@@ -2,6 +2,8 @@
 #include "compilerv.h"
 
 int main() {
-	get_cpp_version();
+	int bin{};
+	bin = 0b11010011;
+	std::cout << std::hex << bin << '\n';
 	return 0;
 }
