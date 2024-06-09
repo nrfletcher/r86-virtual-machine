@@ -1,13 +1,7 @@
 #include <iostream>
-
-int generator(int a, int b);
+#include "compilerv.h"
 
 int main() {
-	std::cout << generator(4, 4);
-	std::cout << "\n";
+	get_cpp_version();
 	return 0;
-}
-
-int generator(int a, int b) {
-	return b + a;
 }
