@@ -5,7 +5,7 @@
 /** Implementation of an in-order processor
  *  Supports fetch-decode-execute-writeback cycle
  *  ISA supports 32-bit instruction encoding
- *  Helpful documentation for this file may be <MEMORY.md> and <ISA.md>
+ *  Docs for this file in <MEMORY.md> and <ISA.md>
  */
 
 /* 64KB of system memory */
