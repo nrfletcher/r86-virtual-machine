@@ -1,9 +1,7 @@
 #include <iostream>
-#include "compilerv.h"
+#include "processor.h"
 
 int main() {
-	int bin{};
-	bin = 0b11010011;
-	std::cout << std::hex << bin << '\n';
+	display_registers();
 	return 0;
 }

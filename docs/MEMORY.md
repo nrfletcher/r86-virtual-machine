@@ -20,7 +20,7 @@ Text (Binary instructions executed by processor)
 LOW
 
 ## Memory Space
-A program will be 64KB in size (64,000 bytes). For sake of simplicity as of now, each section will be 12.8k bytes large.
+A program will be 64KB in size (65,536 bytes). For sake of simplicity as of now, each section will be 12.8k bytes large.
 * Stack (addresses 64000 - 51200)
 * Heap (addresses 51199 - 38400)
 * BSS (addresses 38399 - 25600)

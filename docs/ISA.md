@@ -19,6 +19,7 @@ Supported Opcodes
 * SET REGISTER TO REGISTER
 * SET MEM ADDR TO REGISTER
 * SET MEM ADDR TO IMMEDIATE
+* HALT PROGRAM
 
 Registers
 * PC (Program Counter)
