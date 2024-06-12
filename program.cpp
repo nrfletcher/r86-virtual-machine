@@ -44,8 +44,16 @@ void memwrite(uint32_t addr, uint32_t num_bytes, uint32_t data) {
 	}
 }
 
-void display_memory(uint32_t addr, uint32_t num_bytes) {
-
+void display_memory(uint32_t addr, uint32_t num_32_blocks) {
+	uint32_t curr_addr = addr;
+	for(int i = 0; i < num_32_blocks; i++) {
+		std::cout << "0x" << std::hex << std::setw(8) << std::setfill('0') << curr_addr << ": ";
+		for(int i = 0; i < 32; i++) {
+			std::cout << std::hex << std::setw(2) << std::setfill('0') << read_byte(curr_addr) << " ";
+			curr_addr++;
+		}
+		std::cout << std::endl;
+	}
 }
 
 int main() {
@@ -53,5 +61,6 @@ int main() {
 	memread(0x23, 4);
 	memwrite(0x44, 3, 0x556677);
 	memread(0x44, 3);
+	display_memory(0x0, 2);
 	return 0;
 }
