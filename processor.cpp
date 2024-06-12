@@ -7,8 +7,6 @@
  *  ISA supports 32-bit instruction encoding
  */
 
-std::vector<uint8_t> memory(64 * 1024);
-
 uint32_t pc_reg = 0x0;
 uint32_t rsp_reg = 0x0;
 uint32_t rt_reg = 0x0;
@@ -35,8 +33,8 @@ void display_registers() {
     printf("R11: 0x%04X  R12: 0x%04X  R13: 0x%04X  R14: 0x%04X  R15: 0x%04X\n", r11_reg, r12_reg, r13_reg, r14_reg, r15_reg);
 }
 
-void display_register(std::string register) {
-    // Implement
+void display_register(std::string reg) {
+// Implement
 }
 
 void fetch_instruction() {
@@ -59,6 +57,7 @@ void memory_writeback() {
 // Implement
 }
 
+/* Loads a set of CPU instructions into memory */
 void load_program() {
 // Implement
 }
@@ -109,4 +108,10 @@ void write_2_bytes(std::vector<uint8_t>& memory, uint32_t address, uint32_t valu
 
 void write_byte(std::vector<uint8_t>& memory, uint32_t address, uint32_t value) {
     memory[address] = value & 0xFF;
+}
+
+/* Display a given number of bytes starting at the provided address */
+void show_memory(uint32_t address, uint32_t num_bytes) {
+// get byte at a time?
+// print each byte out 
 }
