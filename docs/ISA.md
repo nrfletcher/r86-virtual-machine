@@ -12,14 +12,23 @@ Instruction Format
 * 32 bit for an immediate (meaning a max value of 2^32 and a max address of 2^32)
 
 Supported Opcodes
+* MOV (between registers, memory, and immediates)
+* PUSH
+* POP
 * ADD
-* SUBTRACT
-* SET REGISTER TO IMMEDIATE
-* SET REGISTER TO MEM ADDR
-* SET REGISTER TO REGISTER
-* SET MEM ADDR TO REGISTER
-* SET MEM ADDR TO IMMEDIATE
-* HALT PROGRAM
+* SUB
+* MUL
+* DIV
+* AND
+* OR
+* XOR
+* NOT
+* SHL
+* SHR
+* JMP (any conditional variations)
+* CALL
+* RET
+* CMP
 
 Registers
 * PC (Program Counter)

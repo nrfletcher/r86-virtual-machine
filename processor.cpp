@@ -3,26 +3,14 @@
 #include <vector>
 
 /** Implementation of an in-order processor
- *  Supports fetch-decode-execute-writeback cycle
- *  ISA supports 32-bit instruction encoding; 64KB system memory
- *  Docs for this file in <MEMORY.md> and <ISA.md>
+ *  Supports fetch-decode-execute-memory-writeback cycle
+ *  ISA supports 32-bit instruction encoding
  */
 
 std::vector<uint8_t> memory(64 * 1024);
 
-const uint32_t STACK_SEGMENT_BEGIN = 0xFA00;
-const uint32_t STACK_SEGMENT_END = 0xC800;
-const uint32_t HEAP_SEGMENT_BEGIN = 0xC7FF;
-const uint32_t HEAP_SEGMENT_END = 0x9600;
-const uint32_t BSS_SEGMENT_BEGIN = 0x95FF;
-const uint32_t BSS_SEGMENT_END = 0x6400;
-const uint32_t DATA_SEGMENT_BEGIN = 0x63FF;
-const uint32_t DATA_SEGMENT_END = 0x3200;
-const uint32_t TEXT_SEGMENT_BEGIN = 0x31FF;
-const uint32_t TEXT_SEGMENT_END = 0x0;
-
-uint32_t pc_reg = TEXT_SEGMENT_END;
-uint32_t rsp_reg = STACK_SEGMENT_BEGIN;
+uint32_t pc_reg = 0x0;
+uint32_t rsp_reg = 0x0;
 uint32_t rt_reg = 0x0;
 uint32_t r0_reg = 0x0;
 uint32_t r1_reg = 0x0;
@@ -47,26 +35,78 @@ void display_registers() {
     printf("R11: 0x%04X  R12: 0x%04X  R13: 0x%04X  R14: 0x%04X  R15: 0x%04X\n", r11_reg, r12_reg, r13_reg, r14_reg, r15_reg);
 }
 
-void fetch_instruction() {
+void display_register(std::string register) {
+    // Implement
+}
 
+void fetch_instruction() {
+// Implement
 }
 
 void decode_instruction() {
-
+// Implement
 }
 
 void execute_instruction() {
-
+// Implement
 }
 
 void read_memory() {
-
+// Implement
 }
 
 void memory_writeback() {
-
+// Implement
 }
 
 void load_program() {
+// Implement
+}
 
+uint32_t read_4_bytes(const std::vector<uint8_t>& memory, uint32_t address) {
+    uint32_t value = (uint32_t)memory[address]
+                  | ((uint32_t)memory[address + 1] << 8)
+                  | ((uint32_t)memory[address + 2] << 16)
+                  | ((uint32_t)memory[address + 3] << 24);
+    return value;
+}
+
+uint32_t read_3_bytes(const std::vector<uint8_t>& memory, uint32_t address) {
+    uint32_t value = (uint32_t)memory[address]
+                  | ((uint32_t)memory[address + 1] << 8)
+                  | ((uint32_t)memory[address + 2] << 16);
+    return value;
+}
+
+uint32_t read_2_bytes(const std::vector<uint8_t>& memory, uint32_t address) {
+    uint32_t value = (uint32_t)memory[address]
+                  | ((uint32_t)memory[address + 1] << 8);
+    return value;
+}
+
+uint32_t read_byte(const std::vector<uint8_t>& memory, uint32_t address) {
+    uint32_t value = (uint32_t)memory[address];
+    return value;
+}
+
+void write_4_bytes(std::vector<uint8_t>& memory, uint32_t address, uint32_t value) {
+    memory[address] = value & 0xFF;
+    memory[address + 1] = (value >> 8) & 0xFF;
+    memory[address + 2] = (value >> 16) & 0xFF;
+    memory[address + 3] = (value >> 24) & 0xFF;
+}
+
+void write_3_bytes(std::vector<uint8_t>& memory, uint32_t address, uint32_t value) {
+    memory[address] = value & 0xFF;
+    memory[address + 1] = (value >> 8) & 0xFF;
+    memory[address + 2] = (value >> 16) & 0xFF;
+}
+
+void write_2_bytes(std::vector<uint8_t>& memory, uint32_t address, uint32_t value) {
+    memory[address] = value & 0xFF;
+    memory[address + 1] = (value >> 8) & 0xFF;
+}
+
+void write_byte(std::vector<uint8_t>& memory, uint32_t address, uint32_t value) {
+    memory[address] = value & 0xFF;
 }
