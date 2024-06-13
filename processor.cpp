@@ -2,11 +2,6 @@
 #include <cstdint>
 #include <vector>
 
-/** Implementation of an in-order processor
- *  Supports fetch-decode-execute-memory-writeback cycle
- *  ISA supports 32-bit instruction encoding
- */
-
 std::vector<uint8_t> memory(64 * 1024);
 
 uint32_t pc_reg = 0x0;
@@ -110,10 +105,4 @@ void write_2_bytes(uint32_t address, uint32_t value) {
 
 void write_byte(uint32_t address, uint32_t value) {
     memory[address] = value & 0xFF;
-}
-
-/* Display a given number of bytes starting at the provided address */
-void show_memory(uint32_t address, uint32_t num_bytes) {
-// get byte at a time?
-// print each byte out 
 }

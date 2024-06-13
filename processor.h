@@ -4,13 +4,16 @@
 #include <vector>
 #include <cstdint>
 
+/*  Implementation of an in-order processor.
+ *  Supports fetch-decode-execute-memory-writeback cycle.
+ *  ISA supports 32-bit instruction encoding. */
+
 void display_registers();
 void display_register(std::string reg);
 
 void fetch_instruction();
 void decode_instruction();
 void execute_instruction();
-void memory_read();
 void memory_writeback();
 void load_program();
 
