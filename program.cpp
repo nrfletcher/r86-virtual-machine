@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 #include "program.h"
 #include "processor.h"
@@ -46,7 +47,7 @@ void memwrite(uint32_t addr, uint32_t num_bytes, uint32_t data) {
 
 void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 	uint32_t curr_addr = addr;
-	for(int i = 0; i < num_32_blocks; i++) {
+	for(uint32_t i = 0; i < num_32_blocks; i++) {
 		std::cout << "0x" << std::hex << std::setw(8) << std::setfill('0') << curr_addr << ": ";
 		for(int i = 0; i < 32; i++) {
 			std::cout << std::hex << std::setw(2) << std::setfill('0') << read_byte(curr_addr) << " ";
@@ -56,11 +57,17 @@ void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 	}
 }
 
+void load_program(std::string file_path) {
+// Takes a set of instructions
+// Moves them into memory
+}
+
 int main() {
-	memwrite(0x23, 4, 0x11223344);
-	memread(0x23, 4);
-	memwrite(0x44, 3, 0x556677);
-	memread(0x44, 3);
-	display_memory(0x0, 2);
+	display_registers();
+	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
+	memwrite(TEXT_SEGMENT_BEGIN, 4, 0x11223344);
+	display_registers();
+	fetch_instruction();
+	display_registers();
 	return 0;
 }

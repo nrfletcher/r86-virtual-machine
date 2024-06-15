@@ -11,11 +11,11 @@
 void display_registers();
 void display_register(std::string reg);
 
+void init_registers(uint32_t stack_begin, uint32_t program_begin);
 void fetch_instruction();
 void decode_instruction();
 void execute_instruction();
 void memory_writeback();
-void load_program();
 
 uint32_t read_4_bytes(uint32_t address);
 uint32_t read_3_bytes(uint32_t address);
