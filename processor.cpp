@@ -6,23 +6,45 @@ std::vector<uint8_t> memory(64 * 1024);
 
 uint32_t pc_reg = 0x0;
 uint32_t rsp_reg = 0x0;
-uint32_t rt_reg = 0x0;
-uint32_t r0_reg = 0x0;
-uint32_t r1_reg = 0x0;
-uint32_t r2_reg = 0x0;
-uint32_t r3_reg = 0x0;
-uint32_t r4_reg = 0x0;
-uint32_t r5_reg = 0x0;
-uint32_t r6_reg = 0x0;
-uint32_t r7_reg = 0x0;
-uint32_t r8_reg = 0x0;
-uint32_t r9_reg = 0x0;
-uint32_t r10_reg = 0x0;
-uint32_t r11_reg = 0x0;
-uint32_t r12_reg = 0x0;
-uint32_t r13_reg = 0x0;
-uint32_t r14_reg = 0x0;
-uint32_t r15_reg = 0x0;
+uint32_t ret_reg = 0x0;
+uint32_t general_registers[16];
+
+void init_registers(uint32_t stack_begin, uint32_t program_begin) {
+    rsp_reg = stack_begin;
+    pc_reg = program_begin;
+}
+
+uint32_t get_pc() {
+    return pc_reg;
+}
+
+void set_pc(uint32_t val) {
+    pc_reg = val;
+}
+
+uint32_t get_rsp() {
+    return rsp_reg;
+}
+
+void set_rsp(uint32_t val) {
+    rsp_reg = val;
+}
+
+uint32_t get_ret() {
+    return ret_reg;
+}
+
+void set_ret(uint32_t val) {
+    ret_reg = val;
+}
+
+uint32_t get_register(int reg) {
+    return general_registers[reg];
+}
+
+void set_register(int reg, uint32_t val) {
+    general_registers[reg] = val;
+}
 
 uint32_t read_4_bytes(uint32_t address) {
     uint32_t value = (uint32_t)memory[address]
@@ -73,19 +95,17 @@ void write_byte(uint32_t address, uint32_t value) {
 }
 
 void display_registers() {
-    printf("PC:  0x%04X  RSP: 0x%04X  RT:  0x%04X  R0:  0x%04X  R1:  0x%04X R2: 0x%04X  R3:  0x%04X\n", pc_reg, rsp_reg, rt_reg, r0_reg, r1_reg, r2_reg, r3_reg);
-    printf("R4:  0x%04X  R5:  0x%04X  R6:  0x%04X  R7:  0x%04X  R8:  0x%04X R9: 0x%04X  R10: 0x%04X\n", r4_reg, r5_reg, r6_reg, r7_reg, r8_reg, r9_reg, r10_reg);
-    printf("R11: 0x%04X  R12: 0x%04X  R13: 0x%04X  R14: 0x%04X  R15: 0x%04X\n", r11_reg, r12_reg, r13_reg, r14_reg, r15_reg);
+    printf("PC:  0x%04X  RSP: 0x%04X  RT:  0x%04X  R0:  0x%04X  R1:  0x%04X R2: 0x%04X  R3:  0x%04X\n", 
+        pc_reg, rsp_reg, rt_reg, general_registers[0], general_registers[1], general_registers[2], general_registers[4]);
+    printf("R4:  0x%04X  R5:  0x%04X  R6:  0x%04X  R7:  0x%04X  R8:  0x%04X R9: 0x%04X  R10: 0x%04X\n", 
+        general_registers[5], general_registers[6], general_registers[7], general_registers[8], general_registers[9], general_registers[10], general_registers[11]);
+    printf("R11: 0x%04X  R12: 0x%04X  R13: 0x%04X  R14: 0x%04X  R15: 0x%04X\n", 
+        general_registers[12], general_registers[13], general_registers[14], general_registers[15], general_registers[16]);
     std::cout << std::endl;
 }
 
 void display_register(std::string reg) {
 // Implement
-}
-
-void init_registers(uint32_t stack_begin, uint32_t program_begin) {
-    rsp_reg = stack_begin;
-    pc_reg = program_begin;
 }
 
 void fetch_instruction() {
