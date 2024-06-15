@@ -13,16 +13,18 @@ Instruction Format
 
 Supported Opcodes
 * MOV (between registers, memory, and immediates)
-    * MOV REG, REG
-    * MOV REG, MEM
-    * MOV MEM, REG
-    * MOV 
-* PUSH
-* POP
-* ADD REG, REG
-* SUB REG, REG
-* MUL
-* DIV
+    * MOV REGX, REGY | OPCODE 1 | moves value in REGY into REGX
+    * MOV REG, MEM | OPCODE 2 | moves value stored at MEM address into REG
+    * MOV MEM, REG | OPCODE 3 | moves value stored in REG into MEM address
+    * MOV REG, IMM | OPCODE 4 | 
+* ADD REG, REG | OPCODE 5
+* ADD REG, IMM | OPCODE 6
+* SUB REG, REG | OPCODE 7
+* SUB REG, IMM | OPCODE 8
+* MUL REG, REG | OPCODE 9
+* MUL REG, IMM | OPCODE 10
+* DIV REG, REG | OPCODE 11
+* DEV REG, IMM | OPCODE 12
 * AND
 * OR
 * XOR
@@ -30,6 +32,8 @@ Supported Opcodes
 * SHL
 * SHR
 * JMP (any conditional variations)
+* PUSH
+* POP
 * CALL
 * RET
 * CMP

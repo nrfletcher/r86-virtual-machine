@@ -46,6 +46,20 @@ void set_register(int reg, uint32_t val) {
     general_registers[reg] = val;
 }
 
+void display_registers() {
+    printf("PC:  0x%04X  RSP: 0x%04X  RT:  0x%04X  R0:  0x%04X  R1:  0x%04X R2: 0x%04X  R3:  0x%04X\n", 
+        pc_reg, rsp_reg, ret_reg, general_registers[0], general_registers[1], general_registers[2], general_registers[4]);
+    printf("R4:  0x%04X  R5:  0x%04X  R6:  0x%04X  R7:  0x%04X  R8:  0x%04X R9: 0x%04X  R10: 0x%04X\n", 
+        general_registers[5], general_registers[6], general_registers[7], general_registers[8], general_registers[9], general_registers[10], general_registers[11]);
+    printf("R11: 0x%04X  R12: 0x%04X  R13: 0x%04X  R14: 0x%04X  R15: 0x%04X\n", 
+        general_registers[12], general_registers[13], general_registers[14], general_registers[15], general_registers[16]);
+    std::cout << std::endl;
+}
+
+void display_register(std::string reg) {
+// Implement
+}
+
 uint32_t read_4_bytes(uint32_t address) {
     uint32_t value = (uint32_t)memory[address]
                   | ((uint32_t)memory[address + 1] << 8)
@@ -92,20 +106,6 @@ void write_2_bytes(uint32_t address, uint32_t value) {
 
 void write_byte(uint32_t address, uint32_t value) {
     memory[address] = value & 0xFF;
-}
-
-void display_registers() {
-    printf("PC:  0x%04X  RSP: 0x%04X  RT:  0x%04X  R0:  0x%04X  R1:  0x%04X R2: 0x%04X  R3:  0x%04X\n", 
-        pc_reg, rsp_reg, rt_reg, general_registers[0], general_registers[1], general_registers[2], general_registers[4]);
-    printf("R4:  0x%04X  R5:  0x%04X  R6:  0x%04X  R7:  0x%04X  R8:  0x%04X R9: 0x%04X  R10: 0x%04X\n", 
-        general_registers[5], general_registers[6], general_registers[7], general_registers[8], general_registers[9], general_registers[10], general_registers[11]);
-    printf("R11: 0x%04X  R12: 0x%04X  R13: 0x%04X  R14: 0x%04X  R15: 0x%04X\n", 
-        general_registers[12], general_registers[13], general_registers[14], general_registers[15], general_registers[16]);
-    std::cout << std::endl;
-}
-
-void display_register(std::string reg) {
-// Implement
 }
 
 void fetch_instruction() {
