@@ -28,6 +28,14 @@ Will need to define:
 * Opcodes (add, sub, load, store, jump, etc.)
 * Instruction format (16/32 bit, opcode, register, immediate)
 
+## How To Load Machine Code Program
+If you would like to run a program using machine code:
+* Create a file ending in .txt
+* Each line should be a single 32 bit instruction or immediate
+* Immediates should go on a new line
+* Individual bits can be seperated by whitespace (loader will ignore this)
+* Lines can end with comments denoted by //, anything after is ignored by loader
+
 ## Fetch Decode Execute
 Will need to define functions for:
 * Fetch instruction from memory

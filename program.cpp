@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <fstream>
 
 #include "program.h"
 #include "processor.h"
@@ -57,12 +58,30 @@ void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 	}
 }
 
-void load_program(std::string file_path) {
-// Takes a set of instructions
-// Moves them into memory
+void load_program() {
+	std::string response;
+	std::cout << "Please provide the filename (no .txt extension) of the program you would like to run." << std::endl;
+	std::cin >> response;
+	std::string line;
+	std::fstream MyReadFile(response);
+	// For each line, parse the instruction and ensure it is a valid length string
+	while(getline(MyReadFile, line)) {
+		std::cout << line << std::endl;
+		std::string instruction;
+
+		for(char& c : line) {
+			if(c == '0' || c == '1') instruction.push_back(c);
+		}
+
+		if(instruction.length() != 32) {
+			std::cerr << "Invalid instruction length: " << instruction.length() << std::endl;
+			exit(1);
+		}
+	}
 }
 
 int main() {
+	load_program();
 	display_registers();
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
 	memwrite(TEXT_SEGMENT_BEGIN, 4, 0x11223344);
