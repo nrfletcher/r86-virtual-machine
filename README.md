@@ -1,7 +1,7 @@
 # OoO Processor
 ### Simulating an out of order processor and program execution
 
-## Brief
+## Overview
 An out-of-order processor is a CPU design which benefits from executing instructions out of their original "order" to avoid stalling.
 By utilizing pipelining, which is essentially treating each execution unit (ALU, LOAD, etc.) as independent, we are able to make use of wasted cycles that an in-order processor would wait for. Being able to reorder instructions enables pipelining, which in turn also enables speculative execution. The majority of modern processors utilize OoO design due to the intense performance boosts. This project is purely academic, and is highly abstracted from the real hardware implementation of an OoO processor. 
 
