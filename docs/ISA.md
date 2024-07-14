@@ -25,18 +25,18 @@ Supported Opcodes
 * MUL REG, IMM | OPCODE 10
 * DIV REG, REG | OPCODE 11
 * DEV REG, IMM | OPCODE 12
-* AND
-* OR
-* XOR
-* NOT
-* SHL
-* SHR
-* JMP (any conditional variations)
-* PUSH
-* POP
-* CALL
-* RET
-* CMP
+* AND REG, REG | OPCODE 13
+* OR  REG, REG | OPCODE 14
+* XOR REG, REG | OPCODE 15
+* NOT REG      | OPCODE 16
+* SHL REG, AMT | OPCODE 17
+* SHR REG, AMT | OPCODE 18
+* JMP ADDRESS  | OPCODE 19
+* PUSH REG     | OPCODE 20
+* POP REG      | OPCODE 21
+* CALL LABEL   | OPCODE 22
+* RET          | OPCODE 23
+* CMP REG, REG | OPCODE 24         
 
 Registers
 * PC (Program Counter)

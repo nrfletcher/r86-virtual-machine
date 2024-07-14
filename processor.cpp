@@ -1,13 +1,27 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
+#include "processor.h"
 
+/* 64KB of program space. */
 std::vector<uint8_t> memory(64 * 1024);
 
+/* All our registers are 32-bits wide. */
 uint32_t pc_reg = 0x0;
 uint32_t rsp_reg = 0x0;
 uint32_t ret_reg = 0x0;
 uint32_t general_registers[16];
+
+/* Flags. */
+bool overflow_flag = 0;
+bool sign_flag = 0;
+bool carry_flag = 0;
+bool zero_flag = 0;
+
+/* Supported opcodes. */
+enum Opcode {
+
+};
 
 void init_registers(uint32_t stack_begin, uint32_t program_begin) {
     rsp_reg = stack_begin;
@@ -57,7 +71,7 @@ void display_registers() {
 }
 
 void display_register(std::string reg) {
-// Implement
+
 }
 
 uint32_t read_4_bytes(uint32_t address) {
@@ -114,14 +128,14 @@ void fetch_instruction() {
 }
 
 void decode_instruction() {
-// Implement
+
 }
 
 void execute_instruction() {
-// Implement
+    
 }
 
 void memory_writeback() {
-// Implement
+    
 }
 
