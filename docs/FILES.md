@@ -14,4 +14,4 @@ An in-order processor implementation
 * Hardware exception handling
 * Memory access interface
 ### ooo_processor.cpp
-An out-of-order processor implementation
+An out-of-order processor implementation (future plans)

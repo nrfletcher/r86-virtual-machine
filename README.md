@@ -27,6 +27,11 @@ Implement registers:
 Will need to define:
 * Opcodes (add, sub, load, store, jump, etc.)
 * Instruction format (16/32 bit, opcode, register, immediate)
+# r86 Virtual Machine
+r(iley)86 is a simplified x86 inspired virtual machine and program emulator.
+
+## Overview
+Currently under development.
 
 ## How To Load Machine Code Program
 If you would like to run a program using machine code:
@@ -34,50 +39,8 @@ If you would like to run a program using machine code:
 * Each line should be a single 32 bit instruction or immediate
 * Immediates should go on a new line
 * Individual bits can be seperated by whitespace (loader will ignore this)
-* Lines can end with comments denoted by //, anything after is ignored by loader
-
-## Fetch Decode Execute
-Will need to define functions for:
-* Fetch instruction from memory
-* Decode instruction
-* Execute instruction
-
-## Memory Management
-Implement LOAD/STORE for registers and memory as well as stack space
-
-## Program Loader
-Will need to add a functionality for:
-* Reading in a program
-* Load that program into memory 
-* Begin execution of program
+* Lines can end with comments denoted by //, anything after is ignored by loaders
 
 
-# Processor Design
 
-## Pipelining
-First step is to develop a simple pipelined processor
-This includes:
-* Recognizing dependencies
-* Stalling
-* Forwarding
-* Speculative execution
-* Look into optimal pipeline depth (?)
-
-Secondly, implement the OOO aspect:
-* Functional units
-* Issue queue (reservation station)
-* Register renaming
-* Reorder buffer
-* Handling misspeculation
-* OOO as a pipeline
-* Common data bus
-
-resources:
-https://www.cs.virginia.edu/~cr4bd/3130/S2024/
-
-
-## Possible additions
-I/O
-<br>
-Assembler
 

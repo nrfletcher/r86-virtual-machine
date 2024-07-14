@@ -1,3 +1,6 @@
+resources:
+https://www.cs.virginia.edu/~cr4bd/3130/S2024/
+
 # Memory Design
 How will memory look in this system. For sake of simplicity, and because this is a process simulation, not a full on OS, we will limit the scope to a single program.
 ## Memory Layout
