@@ -13,30 +13,37 @@ Instruction Format
 
 Supported Opcodes
 * MOV (between registers, memory, and immediates)
-    * MOV REGX, REGY | OPCODE 1 | moves value in REGY into REGX
-    * MOV REG, MEM | OPCODE 2 | moves value stored at MEM address into REG
-    * MOV MEM, REG | OPCODE 3 | moves value stored in REG into MEM address
-    * MOV REG, IMM | OPCODE 4 | 
-* ADD REG, REG | OPCODE 5
-* ADD REG, IMM | OPCODE 6
-* SUB REG, REG | OPCODE 7
-* SUB REG, IMM | OPCODE 8
-* MUL REG, REG | OPCODE 9
-* MUL REG, IMM | OPCODE 10
-* DIV REG, REG | OPCODE 11
-* DEV REG, IMM | OPCODE 12
-* AND REG, REG | OPCODE 13
-* OR  REG, REG | OPCODE 14
-* XOR REG, REG | OPCODE 15
-* NOT REG      | OPCODE 16
-* SHL REG, AMT | OPCODE 17
-* SHR REG, AMT | OPCODE 18
-* JMP ADDRESS  | OPCODE 19
-* PUSH REG     | OPCODE 20
-* POP REG      | OPCODE 21
-* CALL LABEL   | OPCODE 22
-* RET          | OPCODE 23
-* CMP REG, REG | OPCODE 24         
+    * MOV REGX, REGY | OPCODE 0  | moves value in REGY into REGX
+    * MOV REG, MEM   | OPCODE 1  | moves value stored at MEM address into REG
+    * MOV MEM, REG   | OPCODE 2  | moves value stored in REG into MEM address
+    * MOV REG, IMM   | OPCODE 3  | moves value stored in IMM into register REG
+    * MOV MEM, IMM   | OPCODE 4  | moves value stored in IMM into MEM address
+* ADD REGX, REGY     | OPCODE 5  | adds value of REGY to REGX 
+* ADD REG, IMM       | OPCODE 6  | adds value of IMM to REG
+* SUB REGX, REGY     | OPCODE 7  | subtracts 
+* SUB REG, IMM       | OPCODE 8  |
+* MUL REGX, REGY     | OPCODE 9  |
+* MUL REG, IMM       | OPCODE 10 |
+* DIV REGX, REGY     | OPCODE 11 |
+* DEV REG, IMM       | OPCODE 12 |
+* AND REGX, REGY     | OPCODE 13 |
+* OR  REGX, REGY     | OPCODE 14 |
+* XOR REGX, REGY     | OPCODE 15 |
+* NOT REG            | OPCODE 16 |
+* SHL REG, AMT       | OPCODE 17 | 
+* SHR REG, AMT       | OPCODE 18 |
+* JMP ADDRESS        | OPCODE 19 |
+* JE  ADDRESS        | OPCODE 20 |
+* JNE ADDRESS        | OPCODE 21 |
+* JLE ADDRESS        | OPCODE 22 |
+* JGE ADDRESS        | OPCODE 23 |
+* JG  ADDRESS        | OPCODE 24 |
+* JL  ADDRESS        | OPCODE 25 |
+* PUSH REG           | OPCODE 26 |
+* POP REG            | OPCODE 27 |
+* CALL ADDRESS       | OPCODE 28 |
+* RET                | OPCODE 29 |
+* CMP REGX, REGY     | OPCODE 30 | compares REGX and REGY       
 
 Registers
 * PC (Program Counter)

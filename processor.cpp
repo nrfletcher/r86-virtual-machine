@@ -3,26 +3,6 @@
 #include <vector>
 #include "processor.h"
 
-/* 64KB of program space. */
-std::vector<uint8_t> memory(64 * 1024);
-
-/* All our registers are 32-bits wide. */
-uint32_t pc_reg = 0x0;
-uint32_t rsp_reg = 0x0;
-uint32_t ret_reg = 0x0;
-uint32_t general_registers[16];
-
-/* Flags. */
-bool overflow_flag = 0;
-bool sign_flag = 0;
-bool carry_flag = 0;
-bool zero_flag = 0;
-
-/* Supported opcodes. */
-enum Opcode {
-
-};
-
 void init_registers(uint32_t stack_begin, uint32_t program_begin) {
     rsp_reg = stack_begin;
     pc_reg = program_begin;
