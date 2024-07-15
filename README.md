@@ -1,5 +1,5 @@
 # r86 Virtual Machine
-r(iley)86 is a simplified x86 inspired virtual machine and program emulator.
+r(iley)86 is a simplified x86 and LC-3 inspired virtual machine and program emulator.
 
 ## Overview
 Currently under development.

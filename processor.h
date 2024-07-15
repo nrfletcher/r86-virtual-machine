@@ -8,6 +8,18 @@
 #define DEBUG 1 // Enable to print basic debugging statements.
 #define DEBUG_V 1 // Enable to print verbose debugging statements.
 
+#if DEBUG
+    #define DEBUG_PRINT(x) std::cout << x << std::endl
+#else
+    #define DEBUG_PRINT(x)
+#endif
+
+#if DEBUG_V
+    #define DEBUG_PRINT_V(x) std::cout << x << std::endl
+#else
+    #define DEBUG_PRINT_V(x)
+#endif
+
 #include <vector>
 #include <cstdint>
 
@@ -69,6 +81,9 @@ enum Register {
     REGISTER_15,
 };
 
+/* Trap routines. */
+
+
 void display_registers();
 void display_register(std::string reg);
 void init_registers(uint32_t stack_begin, uint32_t program_begin);
@@ -93,6 +108,6 @@ void write_byte(uint32_t address, uint32_t value);
 
 uint32_t fetch_instruction();
 void execute_instruction();
-void execute_program();
+void execute_program(bool interactive_mode);
 
 #endif

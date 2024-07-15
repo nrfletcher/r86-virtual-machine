@@ -58,12 +58,16 @@ void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 	}
 }
 
+/* Takes the first argument given when running program
+ * and loads the binary file into memory. If an instruction
+   is malformed the program ends. */
 void load_program(const std::string& filename) {
 	std::string filepath = "programs/" + filename + ".txt";
 	std::ifstream MyReadFile(filepath);
 
 	if(!MyReadFile.is_open()) {
-		std::cerr << "Error: Unable to open file." << filepath << std::endl;
+		std::cerr << "Error: Unable to open file: " << filepath << std::endl;
+		std::cerr << "Ensure that the program binary you wish to run is in /programs" << std::endl;
 		exit(1);
 	}
 
@@ -78,7 +82,7 @@ void load_program(const std::string& filename) {
 		}
 
 		if(instruction.length() != 32) {
-			std::cerr << "Invalid instruction length: " << instruction.length() << std::endl;
+			std::cerr << "Error: Invalid instruction length: " << instruction.length() << std::endl;
 			exit(1);
 		}
 	}
@@ -87,15 +91,25 @@ void load_program(const std::string& filename) {
 }
 
 int main(int argc, char* argv[]) {
-	if(argc < 2) {
-		std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
+	/* User needs to provide a program file to run and a choice of execution mode. */
+	if(argc < 3) {
+		std::cerr << "Usage: " << argv[0] << " <filename> <interactive>" << std::endl;
+		std::cerr << "Filename is binary you wish to run, interactive mode is 1 or 0." << std::endl;
+		exit(1);
+	}
+
+	/* Currently supported modes: interactive and non-interactive. */
+	bool interactive_mode = (bool) argv[2];
+	if(interactive_mode != 0 && interactive_mode != 1) {
+		std::cerr << "Invalid argument for interactive mode: " << interactive_mode << std::endl;
+		exit(1);
 	}
 
 	std::string filename = argv[1];
 	load_program(filename);
 
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
-	execute_program();
+	execute_program(interactive_mode);
 
 	return 0;
 }
