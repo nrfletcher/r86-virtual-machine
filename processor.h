@@ -1,27 +1,15 @@
 #ifndef PROCESSOR_H
 #define PROCESSOR_H
 
-#include <vector>
-#include <cstdint>
-
 /*  Implementation of an in-order processor.
  *  Supports fetch-decode-execute-memory-writeback cycle.
  *  ISA supports 32-bit instruction encoding. */
 
-/* 64KB of program space. */
-std::vector<uint8_t> memory(64 * 1024);
+#define DEBUG 1 // Enable to print basic debugging statements.
+#define DEBUG_V 1 // Enable to print verbose debugging statements.
 
-/* All our registers are 32-bits wide. */
-uint32_t pc_reg = 0x0;
-uint32_t rsp_reg = 0x0;
-uint32_t ret_reg = 0x0;
-uint32_t general_registers[16];
-
-/* Flags. */
-bool overflow_flag = 0;
-bool sign_flag = 0;
-bool carry_flag = 0;
-bool zero_flag = 0;
+#include <vector>
+#include <cstdint>
 
 /* Supported opcodes. */
 enum Opcode {
@@ -103,9 +91,8 @@ void write_3_bytes(uint32_t address, uint32_t value);
 void write_2_bytes(uint32_t address, uint32_t value);
 void write_byte(uint32_t address, uint32_t value);
 
-void fetch_instruction();
-void decode_instruction();
+uint32_t fetch_instruction();
 void execute_instruction();
-void memory_writeback();
+void execute_program();
 
 #endif

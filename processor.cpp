@@ -3,6 +3,21 @@
 #include <vector>
 #include "processor.h"
 
+/* 64KB of program space. */
+std::vector<uint8_t> memory(64 * 1024);
+
+/* All our registers are 32-bits wide. */
+uint32_t pc_reg = 0x0;
+uint32_t rsp_reg = 0x0;
+uint32_t ret_reg = 0x0;
+uint32_t general_registers[16];
+
+/* Flags. */
+bool overflow_flag = 0;
+bool sign_flag = 0;
+bool carry_flag = 0;
+bool zero_flag = 0;
+
 void init_registers(uint32_t stack_begin, uint32_t program_begin) {
     rsp_reg = stack_begin;
     pc_reg = program_begin;
@@ -51,7 +66,7 @@ void display_registers() {
 }
 
 void display_register(std::string reg) {
-
+// Implement
 }
 
 uint32_t read_4_bytes(uint32_t address) {
@@ -102,20 +117,31 @@ void write_byte(uint32_t address, uint32_t value) {
     memory[address] = value & 0xFF;
 }
 
-void fetch_instruction() {
+uint32_t fetch_instruction() {
     uint32_t instruction = read_4_bytes(pc_reg);
     pc_reg += 4;
+    return instruction;
 }
 
-void decode_instruction() {
-
-}
-
+/** Main execution function.
+ *  Responsible for taking an instruction, and executing the appropriate
+    opcode depending on what the instruction provides. */ 
 void execute_instruction() {
+    uint32_t instruction = fetch_instruction();
+    uint32_t opcode = 0;
     
+    switch (opcode) {
+        case MOV_REG_REG_OPCODE:
+            break;
+        case MOV_REG_IMM_OPCODE:
+            break;
+            
+        default:
+            std::cerr << "Invalid opcode: " << opcode << std::endl; 
+    }
+
 }
 
-void memory_writeback() {
+void execute_program() {
     
 }
-

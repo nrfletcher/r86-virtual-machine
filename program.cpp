@@ -58,12 +58,16 @@ void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 	}
 }
 
-void load_program() {
-	std::string response;
-	std::cout << "Please provide the filename (no .txt extension) of the program you would like to run." << std::endl;
-	std::cin >> response;
+void load_program(const std::string& filename) {
+	std::string filepath = "programs/" + filename + ".txt";
+	std::ifstream MyReadFile(filepath);
+
+	if(!MyReadFile.is_open()) {
+		std::cerr << "Error: Unable to open file." << filepath << std::endl;
+		exit(1);
+	}
+
 	std::string line;
-	std::fstream MyReadFile(response);
 	// For each line, parse the instruction and ensure it is a valid length string
 	while(getline(MyReadFile, line)) {
 		std::cout << line << std::endl;
@@ -78,15 +82,20 @@ void load_program() {
 			exit(1);
 		}
 	}
+
+	MyReadFile.close();
 }
 
-int main() {
-	load_program();
-	display_registers();
+int main(int argc, char* argv[]) {
+	if(argc < 2) {
+		std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
+	}
+
+	std::string filename = argv[1];
+	load_program(filename);
+
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
-	memwrite(TEXT_SEGMENT_BEGIN, 4, 0x11223344);
-	display_registers();
-	fetch_instruction();
-	display_registers();
+	execute_program();
+
 	return 0;
 }
