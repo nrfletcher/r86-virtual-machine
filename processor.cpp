@@ -239,6 +239,9 @@ void execute_instruction() {
         case CMP_OPCODE:
             // cmp();
             break;
+        case HALT_OPCODE:
+            // halt()
+            break;
         default:
             std::cerr << "Invalid opcode: " << opcode << std::endl;
     }

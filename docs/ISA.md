@@ -21,29 +21,36 @@ Supported Opcodes
 * ADD REGX, REGY     | OPCODE 5  | adds value of REGY to REGX 
 * ADD REG, IMM       | OPCODE 6  | adds value of IMM to REG
 * SUB REGX, REGY     | OPCODE 7  | subtracts 
-* SUB REG, IMM       | OPCODE 8  |
-* MUL REGX, REGY     | OPCODE 9  |
-* MUL REG, IMM       | OPCODE 10 |
-* DIV REGX, REGY     | OPCODE 11 |
-* DEV REG, IMM       | OPCODE 12 |
-* AND REGX, REGY     | OPCODE 13 |
-* OR  REGX, REGY     | OPCODE 14 |
-* XOR REGX, REGY     | OPCODE 15 |
-* NOT REG            | OPCODE 16 |
-* SHL REG, AMT       | OPCODE 17 | 
-* SHR REG, AMT       | OPCODE 18 |
-* JMP ADDRESS        | OPCODE 19 |
-* JE  ADDRESS        | OPCODE 20 |
-* JNE ADDRESS        | OPCODE 21 |
-* JLE ADDRESS        | OPCODE 22 |
-* JGE ADDRESS        | OPCODE 23 |
-* JG  ADDRESS        | OPCODE 24 |
-* JL  ADDRESS        | OPCODE 25 |
-* PUSH REG           | OPCODE 26 |
-* POP REG            | OPCODE 27 |
-* CALL ADDRESS       | OPCODE 28 |
-* RET                | OPCODE 29 |
-* CMP REGX, REGY     | OPCODE 30 | compares REGX and REGY       
+* SUB REG, IMM       | OPCODE 8  | subtracts 
+* MUL REGX, REGY     | OPCODE 9  | multiplies
+* MUL REG, IMM       | OPCODE 10 | multiplies
+* DIV REGX, REGY     | OPCODE 11 | divides 
+* DEV REG, IMM       | OPCODE 12 | divides 
+* AND REGX, REGY     | OPCODE 13 | performs AND operation
+* OR  REGX, REGY     | OPCODE 14 | performs OR operation
+* XOR REGX, REGY     | OPCODE 15 | performs XOR operation
+* NOT REG            | OPCODE 16 | performs NOT operation
+* SHL REG, AMT       | OPCODE 17 | performs a shift left
+* SHR REG, AMT       | OPCODE 18 | performs a shift right
+* JMP ADDRESS        | OPCODE 19 | performs an unconditional jump to ADDRESS
+* JE  ADDRESS        | OPCODE 20 | performs a conditional jump
+* JNE ADDRESS        | OPCODE 21 | performs a conditional jump
+* JLE ADDRESS        | OPCODE 22 | performs a conditional jump
+* JGE ADDRESS        | OPCODE 23 | performs a conditional jump
+* JG  ADDRESS        | OPCODE 24 | performs a conditional jump
+* JL  ADDRESS        | OPCODE 25 | performs a conditional jump
+* PUSH REG           | OPCODE 26 | pushes content of REG onto the stack
+* POP REG            | OPCODE 27 | pops the content of the RSP into REG
+* CALL ADDRESS       | OPCODE 28 | jumps to ADDRESS, and pushes ADDRESS + 1 onto the stack
+* RET                | OPCODE 29 | pops the stack and sets PC to the popped value
+* CMP REGX, REGY     | OPCODE 30 | compares REGX and REGY   
+* HALT               | OPCODE 31 | terminates the program
+
+Trap Routines
+* GETC   |  Get a singular character.
+* OUTC   |  Output a singular character.
+* PUTS   |  Outputs a string at an address.
+* GETS   |  Stored a given string at a memory location.
 
 Registers
 * PC (Program Counter)

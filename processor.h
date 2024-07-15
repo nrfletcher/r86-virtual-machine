@@ -56,6 +56,15 @@ enum Opcode {
     CALL_OPCODE,
     RET_OPCODE,
     CMP_OPCODE,
+    HALT_OPCODE,
+};
+
+/* Supported trap routines. */
+enum TrapRoutine {
+    GETC_TRAP = 200,
+    OUTC_TRAP,
+    PUTS_TRAP,
+    GETS_TRAP,
 };
 
 /* Register identifiers. */
