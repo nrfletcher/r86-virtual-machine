@@ -57,6 +57,7 @@ enum Opcode {
     RET_OPCODE,
     CMP_OPCODE,
     HALT_OPCODE,
+    TEST_OPCODE,
 };
 
 /* Supported trap routines. */

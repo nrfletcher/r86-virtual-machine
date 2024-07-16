@@ -73,8 +73,27 @@ void display_registers() {
     std::cout << std::endl;
 }
 
-void display_register(std::string reg) {
-// Implement
+void display_register(uint32_t reg) {
+    switch(reg) {
+        case PC_REGISTER:
+            printf("PC: 0x%04X\n", pc_reg);
+            break;
+        case RET_REGISTER:
+            printf("RET: 0x%04X\n", ret_reg);
+            break;
+        case RSP_REGISTER:
+            printf("RET: 0x%04X\n", rsp_reg);
+            break;
+        default:
+            if(reg <= REGISTER_15 && reg >= REGISTER_0) {
+                printf("R%d: 0x%04X\n", reg, general_registers[reg]);
+                return;
+            } else {
+                std::cerr << "Invalid register: " << reg << std::endl;
+                return; 
+            }
+            break;
+    }
 }
 
 /* GENERIC MEMORY READ AND WRITE FUNCTIONS */
