@@ -90,9 +90,6 @@ enum Register {
     REGISTER_15,
 };
 
-/* Trap routines. */
-
-
 void display_registers();
 void display_register(std::string reg);
 void init_registers(uint32_t stack_begin, uint32_t program_begin);
