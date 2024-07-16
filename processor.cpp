@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
+
 #include "processor.h"
 
 /* 64KB of program space. */
@@ -264,8 +265,4 @@ void execute_instruction() {
         default:
             std::cerr << "Invalid opcode: " << opcode << std::endl;
     }
-}
-
-void execute_program(bool interactive_mode) {
-    
 }

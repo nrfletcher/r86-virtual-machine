@@ -21,5 +21,6 @@ const uint32_t TEXT_SEGMENT_END = 0x0;
 void memread(uint32_t addr, uint32_t num_bytes);
 void memwrite(uint32_t addr, uint32_t num_bytes, uint32_t data);
 void display_memory(uint32_t addr, uint32_t num_32_blocks);
+void execute_program(bool interactive_mode);
 
 #endif

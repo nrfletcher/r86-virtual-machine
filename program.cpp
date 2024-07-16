@@ -90,6 +90,10 @@ void load_program(const std::string& filename) {
 	MyReadFile.close();
 }
 
+void execute_program(bool interactive_mode) {
+	
+}
+
 int main(int argc, char* argv[]) {
 	/* User needs to provide a program file to run and a choice of execution mode. */
 	if(argc < 3) {

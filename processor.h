@@ -60,6 +60,7 @@ enum Opcode {
     TEST_OPCODE,
 };
 
+
 /* Supported trap routines. */
 enum TrapRoutine {
     GETC_TRAP = 200,
@@ -92,7 +93,7 @@ enum Register {
 };
 
 void display_registers();
-void display_register(std::string reg);
+void display_register(uint32_t reg);
 void init_registers(uint32_t stack_begin, uint32_t program_begin);
 
 void set_pc(uint32_t val);
@@ -115,6 +116,5 @@ void write_byte(uint32_t address, uint32_t value);
 
 uint32_t fetch_instruction();
 void execute_instruction();
-void execute_program(bool interactive_mode);
 
 #endif
