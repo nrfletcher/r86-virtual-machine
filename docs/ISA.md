@@ -6,7 +6,7 @@ Supported Architecture
 * 32-bit immediate value if specified by opcode
 
 Instruction Format
-* [TOP 13 BITS UNUSED] [NEXT 5 OPCODE] [NEXT 4 OPCODE FLAGS] [NEXT 5 OPERAND X] [NEXT 5 OPERAND Y]
+* [TOP 12 BITS UNUSED] [NEXT 6 OPCODE] [NEXT 4 OPCODE FLAGS] [NEXT 5 OPERAND X] [NEXT 5 OPERAND Y]
 * 5 bits for two operand definers (two registers, 32 possibilities) each (10 bits total)
 * 6 opcode bits (64 total opcodes available)
 * 32 bit for an immediate (meaning a max value of 2^32 and a max address of 2^32)
@@ -38,7 +38,7 @@ Supported Opcodes
 * JLE ADDRESS        | OPCODE 22 | performs a conditional jump if 
 * JGE ADDRESS        | OPCODE 23 | performs a conditional jump if 
 * JG  ADDRESS        | OPCODE 24 | performs a conditional jump if 
-* JL  ADDRESS        | OPCODE 25 | performs a conditional jump ifs
+* JL  ADDRESS        | OPCODE 25 | performs a conditional jump if
 * PUSH REG           | OPCODE 26 | pushes content of REG onto the stack
 * POP REG            | OPCODE 27 | pops the content of the RSP into REG
 * CALL ADDRESS       | OPCODE 28 | jumps to ADDRESS, and pushes ADDRESS + 1 onto the stack

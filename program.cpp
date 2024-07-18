@@ -91,7 +91,13 @@ void load_program(const std::string& filename) {
 }
 
 void execute_program(bool interactive_mode) {
-	
+	/* Interactive mode allows user to step through code 
+	   Otherwise, we execute the entire program */
+	if(interactive_mode) {
+
+	} else {
+
+	}
 }
 
 int main(int argc, char* argv[]) {
