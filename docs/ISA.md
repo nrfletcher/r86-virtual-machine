@@ -10,14 +10,17 @@ Instruction Format
 * 5 bits for two operand definers (two registers, 32 possibilities) each (10 bits total)
 * 6 opcode bits (64 total opcodes available)
 * 32 bit for an immediate (meaning a max value of 2^32 and a max address of 2^32)
+* 4 opcode flags for future additional functionality built in later
+* all MEM must be stored in a register
+* all immediate must be in the following 32 bit value after an opcode
 
 Supported Opcodes
 * MOV (between registers, memory, and immediates)
-    * MOV REGX, REGY | OPCODE 0  | moves value in REGY into REGX
-    * MOV REG, MEM   | OPCODE 1  | moves value stored at MEM address into REG
-    * MOV MEM, REG   | OPCODE 2  | moves value stored in REG into MEM address
-    * MOV REG, IMM   | OPCODE 3  | moves value stored in IMM into register REG
-    * MOV MEM, IMM   | OPCODE 4  | moves value stored in IMM into MEM address
+    * MOV REGX, REGY      | OPCODE 0  | moves value in REGY into REGX
+    * MOV REG, MEM[REG]   | OPCODE 1  | moves value stored at MEM address into REG
+    * MOV MEM[REG], REG   | OPCODE 2  | moves value stored in REG into MEM address
+    * MOV REG, IMM        | OPCODE 3  | moves value stored in IMM into register REG
+    * MOV MEM[REG], IMM   | OPCODE 4  | moves value stored in IMM into MEM address
 * ADD REGX, REGY     | OPCODE 5  | adds value of REGY to REGX 
 * ADD REG, IMM       | OPCODE 6  | adds value of IMM to REG
 * SUB REGX, REGY     | OPCODE 7  | subtracts REGY from REGX

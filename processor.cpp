@@ -157,13 +157,23 @@ uint32_t fetch_instruction() {
     return instruction;
 }
 
+/* Is the memory block we are attempting to access within program space. */
+bool verify_safe_memory_access(uint32_t) {
+    return false;
+}
+
 /** Main execution function.
  *  Massive switch statement for now, could try to reduce this to a function pointer array later.
  *  Responsible for taking an instruction, and executing the appropriate
     opcode depending on what the instruction provides. */ 
 void execute_instruction() {
     uint32_t instruction = fetch_instruction();
-    uint32_t opcode = 0;  // You'll need to extract the opcode from the instruction
+
+    /* Extracting bits according to ISA specification. */
+    uint8_t opcode = (instruction >> 14) & 0x3F;
+    uint8_t flags = (instruction >> 10) & 0xF;
+    uint8_t operand_1 = (instruction >> 5) & 0x1F;
+    uint8_t operand_2 = (instruction) & 0x1F;
    
     switch (opcode) {
         case MOV_REG_REG_OPCODE:
