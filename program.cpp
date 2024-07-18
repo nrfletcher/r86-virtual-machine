@@ -115,5 +115,5 @@ int main(int argc, char* argv[]) {
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
 	execute_program(interactive_mode);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
