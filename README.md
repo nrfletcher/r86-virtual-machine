@@ -1,8 +1,13 @@
-# r86 Virtual Machine
-r(iley)86 is a simplified x86 and LC-3 inspired virtual machine and program emulator.
+<div align="center">
+<a name="readme-top"></a>
+  
+# ✳️ r86 Virtual Machine
+A minimal LC-3 and x86 based virtual machine.
+
+</div>
 
 ## Overview
-Currently under development.
+r86 aims to be a simplistic, navigable, and educational virtual machine that offers a casual experience of running machine code instructions to emulate a processor. r86 plans to come with a program loader, debugging tools, and assembler.
 
 ## How To Load Machine Code Program
 If you would like to run a program using machine code:
