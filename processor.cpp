@@ -177,7 +177,7 @@ void execute_instruction() {
    
     switch (opcode) {
         case MOV_REG_REG_OPCODE:
-            // mov_reg_reg();
+            operand_1 = operand_2;
             break;
         case MOV_REG_MEM_OPCODE:
             // mov_reg_mem();
