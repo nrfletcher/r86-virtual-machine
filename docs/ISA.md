@@ -1,5 +1,5 @@
 # Instruction Set Architecture Design
-ISA supports 32-bit von-Neumann architecture
+ISA supports 32-bit von-Neumann architecture with big endian byte encoding
 ## Instruction Format
 Supported Architecture
 * 32-bit instruction length

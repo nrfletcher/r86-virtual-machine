@@ -177,6 +177,13 @@ void execute_instruction() {
     uint8_t flags = (instruction >> 10) & 0xF;
     uint8_t operand_1 = (instruction >> 5) & 0x1F;
     uint8_t operand_2 = (instruction) & 0x1F;
+
+    DEBUG_PRINT_V("Instruction: " << instruction);
+    DEBUG_PRINT_V("Current PC: 0x" << std::hex << pc_reg);
+    DEBUG_PRINT_V("Opcode: " << opcode);
+    DEBUG_PRINT_V("Flags: 0x" << std::hex << flags);
+    DEBUG_PRINT_V("Operand 1: " << operand_1);
+    DEBUG_PRINT_V("Operand 2: " << operand_2);
    
     switch (opcode) {
         case MOV_REG_REG_OPCODE:

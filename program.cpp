@@ -9,6 +9,8 @@
 #include "processor.h"
 #include "macros.h"
 
+uint32_t prog_instruction_count = 0;
+
 void memread(uint32_t addr, uint32_t num_bytes) {
 	switch(num_bytes) {
 		case 1:
@@ -61,6 +63,11 @@ void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 	}
 }
 
+/* Displays hex memory of total program */
+void display_program() {
+	display_memory(TEXT_SEGMENT_BEGIN, prog_instruction_count);
+}
+
 /* Loads a 4 byte value into a memory address for our program */
 void load_instruction(const std::string& instruction, uint32_t address) {
 	if(instruction.length() != 32) {
@@ -78,7 +85,7 @@ void load_instruction(const std::string& instruction, uint32_t address) {
 		throw std::invalid_argument("Address outside text segment");
 	} else {
 		memwrite(address, 4, data);
-		DEBUG_PRINT_V("Wrote: " << std::hex << data << " to " << address);
+		DEBUG_PRINT_V("Wrote: 0x" << std::hex << data << " to 0x" << address);
 	}
 }
 
@@ -119,6 +126,7 @@ void load_program(const std::string& filename) {
 		try {
 			load_instruction(instruction, curr_address);
 			curr_address += 4;
+			prog_instruction_count++;
 		} catch(const std::invalid_argument& e) {
 			std::cerr << "Error processing instruction: " << e.what() << std::endl;
 			exit(1);
@@ -158,6 +166,10 @@ int main(int argc, char* argv[]) {
 
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
 	execute_program(interactive_mode);
+
+	execute_instruction();
+
+	display_program();
 
 	return EXIT_SUCCESS;
 }
