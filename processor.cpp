@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "processor.h"
+#include "macros.h"
 
 /* 64KB of program space. */
 std::vector<uint8_t> memory(64 * 1024);
@@ -21,7 +22,7 @@ bool zero_flag = 0;
 
 /* Set the beginning of our code segment and stack segment in memory. */
 void init_registers(uint32_t stack_begin, uint32_t program_begin) {
-    DEBUG_PRINT_V("Stack begin: " << stack_begin << "Program begin: " << program_begin);
+    DEBUG_PRINT_V("Stack begin: " << std::hex << stack_begin << " Program begin: " << program_begin);
     rsp_reg = stack_begin;
     pc_reg = program_begin;
 }

@@ -5,6 +5,7 @@
 
 #include "program.h"
 #include "processor.h"
+#include "macros.h"
 
 void memread(uint32_t addr, uint32_t num_bytes) {
 	switch(num_bytes) {

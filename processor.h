@@ -5,21 +5,6 @@
  *  Supports fetch-decode-execute-memory-writeback cycle.
  *  ISA supports 32-bit instruction encoding. */
 
-#define DEBUG 1 // Enable to print basic debugging statements.
-#define DEBUG_V 1 // Enable to print verbose debugging statements.
-
-#if DEBUG
-    #define DEBUG_PRINT(x) std::cout << x << std::endl
-#else
-    #define DEBUG_PRINT(x)
-#endif
-
-#if DEBUG_V
-    #define DEBUG_PRINT_V(x) std::cout << x << std::endl
-#else
-    #define DEBUG_PRINT_V(x)
-#endif
-
 #include <vector>
 #include <cstdint>
 
