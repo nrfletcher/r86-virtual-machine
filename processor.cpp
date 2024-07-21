@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
+#include <iomanip>
 
 #include "processor.h"
 #include "macros.h"
@@ -173,17 +174,22 @@ void execute_instruction() {
     uint32_t immediate = fetch_instruction();
 
     /* Extracting bits according to ISA specification. */
-    uint8_t opcode = (instruction >> 14) & 0x3F;
-    uint8_t flags = (instruction >> 10) & 0xF;
-    uint8_t operand_1 = (instruction >> 5) & 0x1F;
-    uint8_t operand_2 = (instruction) & 0x1F;
+    uint32_t opcode = (instruction >> 14) & 0x3F;
+    uint32_t flags = (instruction >> 10) & 0xF;
+    uint32_t operand_1 = (instruction >> 5) & 0x1F;
+    uint32_t operand_2 = (instruction) & 0x1F;
 
-    DEBUG_PRINT_V("Instruction: " << instruction);
-    DEBUG_PRINT_V("Current PC: 0x" << std::hex << pc_reg);
-    DEBUG_PRINT_V("Opcode: " << opcode);
-    DEBUG_PRINT_V("Flags: 0x" << std::hex << flags);
-    DEBUG_PRINT_V("Operand 1: " << operand_1);
-    DEBUG_PRINT_V("Operand 2: " << operand_2);
+    printf("Operand 1 %d\n", operand_1);
+    printf("Operand 2 %d\n", operand_2);
+    printf("Opcode: %d\n", opcode);
+
+
+    DEBUG_PRINT_V("Instruction: " << std::hex << std::setw(8) << std::setfill('0') << instruction);
+    DEBUG_PRINT_V("Current PC: 0x" << std::hex << std::setw(8) << std::setfill('0') << pc_reg);
+    DEBUG_PRINT_V("Opcode: " << std::hex << std::setw(4) << std::setfill('0') << opcode);
+    DEBUG_PRINT_V("Flags: 0x" << std::hex << std::setw(4) << std::setfill('0') << flags);
+    DEBUG_PRINT_V("Operand 1: " << std::hex << std::setw(4) << std::setfill('0') << operand_1);
+    DEBUG_PRINT_V("Operand 2: " << std::hex << std::setw(4) << std::setfill('0') << operand_2);
    
     switch (opcode) {
         case MOV_REG_REG_OPCODE:
