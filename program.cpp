@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
+#include <stdexcept>
+#include <cstdint>
 
 #include "program.h"
 #include "processor.h"
@@ -61,7 +63,23 @@ void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 
 /* Loads a 4 byte value into a memory address for our program */
 void load_instruction(const std::string& instruction, uint32_t address) {
+	if(instruction.length() != 32) {
+		throw std::invalid_argument("Instruction is not 32 bits long");
+	}
 
+	uint32_t data = 0;
+	for(char c : instruction) {
+		if(c != '0' && c != '1') {
+			throw std::invalid_argument("Invalid character in instruction");
+		}
+		data = (data << 1) | (c - '0');
+	}
+	if(address > TEXT_SEGMENT_END || address < TEXT_SEGMENT_BEGIN) {
+		throw std::invalid_argument("Address outside text segment");
+	} else {
+		memwrite(address, 4, data);
+		DEBUG_PRINT_V("Wrote: " << std::hex << data << " to " << address);
+	}
 }
 
 /* Takes the first argument given when running program
@@ -98,8 +116,13 @@ void load_program(const std::string& filename) {
 			std::cerr << "Error: Invalid instruction length: " << instruction.length() << std::endl;
 			exit(1);
 		}
-		load_instruction(instruction, curr_address);
-		curr_address += 4;
+		try {
+			load_instruction(instruction, curr_address);
+			curr_address += 4;
+		} catch(const std::invalid_argument& e) {
+			std::cerr << "Error processing instruction: " << e.what() << std::endl;
+			exit(1);
+		}
 	}
 
 	MyReadFile.close();
