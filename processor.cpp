@@ -168,6 +168,8 @@ bool verify_safe_memory_access(uint32_t) {
     opcode depending on what the instruction provides. */ 
 void execute_instruction() {
     uint32_t instruction = fetch_instruction();
+    /* Used for any opcodes that require an immediate */
+    uint32_t immediate = fetch_instruction();
 
     /* Extracting bits according to ISA specification. */
     uint8_t opcode = (instruction >> 14) & 0x3F;
@@ -177,31 +179,31 @@ void execute_instruction() {
    
     switch (opcode) {
         case MOV_REG_REG_OPCODE:
-            operand_1 = operand_2;
+            
             break;
         case MOV_REG_MEM_OPCODE:
-            // mov_reg_mem();
+            
             break;
         case MOV_MEM_REG_OPCODE:
-            // mov_mem_reg();
+            
             break;
         case MOV_REG_IMM_OPCODE:
-            // mov_reg_imm();
+            
             break;
         case MOV_MEM_IMM_OPCODE:
-            // mov_mem_imm();
+            
             break;
         case ADD_REG_REG_OPCODE:
-            // add_reg_reg();
+            
             break;
         case ADD_REG_IMM_OPCODE:
-            // add_reg_imm();
+            
             break;
         case SUB_REG_REG_OPCODE:
-            // sub_reg_reg();
+            
             break;
         case SUB_REG_IMM_OPCODE:
-            // sub_reg_imm();
+            
             break;
         case MUL_REG_REG_OPCODE:
             // mul_reg_reg();

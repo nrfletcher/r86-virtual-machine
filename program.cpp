@@ -58,12 +58,18 @@ void display_memory(uint32_t addr, uint32_t num_32_blocks) {
 	}
 }
 
+/* Loads a 4 byte value into a memory address for our program */
+void load_instruction(const std::string& instruction, uint32_t address) {
+
+}
+
 /* Takes the first argument given when running program
  * and loads the binary file into memory. If an instruction
    is malformed the program ends. */
 void load_program(const std::string& filename) {
 	std::string filepath = "programs/" + filename + ".txt";
 	std::ifstream MyReadFile(filepath);
+	uint32_t curr_address = TEXT_SEGMENT_BEGIN;
 
 	if(!MyReadFile.is_open()) {
 		std::cerr << "Error: Unable to open file: " << filepath << std::endl;
@@ -78,6 +84,12 @@ void load_program(const std::string& filename) {
 		std::string instruction;
 
 		for(char& c : line) {
+			if(c == '#' && instruction.length() < 32) {
+				std::cerr << "Error: Invalid or malformed instruction, found character " << c << " before parsing 32 bits" << std::endl;
+				exit(1);
+			} else if(c == '#' && instruction.length() >= 32) {
+				break;
+			}
 			if(c == '0' || c == '1') instruction.push_back(c);
 		}
 
@@ -85,6 +97,8 @@ void load_program(const std::string& filename) {
 			std::cerr << "Error: Invalid instruction length: " << instruction.length() << std::endl;
 			exit(1);
 		}
+		load_instruction(instruction, curr_address);
+		curr_address += 4;
 	}
 
 	MyReadFile.close();
