@@ -161,8 +161,9 @@ bool verify_safe_memory_access(uint32_t) {
 /** Main execution function that implements the fetch-decode-execute-memory-writeback cycle.
  *  Massive switch statement for now, could try to reduce this to a function pointer array later.
  *  Responsible for taking an instruction, and executing the appropriate
-    opcode depending on what the instruction provides. */ 
-void execute_instruction() {
+    opcode depending on what the instruction provides. 
+    We return 0 for all opcodes, except HALT which returns 1. */ 
+int execute_instruction() {
     /* Fetch instruction. */
     uint32_t instruction = read_4_bytes(pc_reg);
     pc_reg += 4;
@@ -181,6 +182,7 @@ void execute_instruction() {
     DEBUG_PRINT_V("Flags: 0x" << std::hex << std::setw(4) << std::setfill('0') << flags);
     DEBUG_PRINT_V("Operand 1: 0x" << std::hex << std::setw(4) << std::setfill('0') << operand_1);
     DEBUG_PRINT_V("Operand 2: 0x" << std::hex << std::setw(4) << std::setfill('0') << operand_2);
+    DEBUG_PRINT_V("");
    
     /* Execute instruction. */
     switch (opcode) {
@@ -284,9 +286,10 @@ void execute_instruction() {
             // cmp();
             break;
         case HALT_OPCODE:
-            // halt()
-            break;
+            return 1;
         default:
             std::cerr << "Invalid opcode: " << opcode << std::endl;
     }
+    /* Return 0 for regular opcode. */
+    return 0;
 }

@@ -142,8 +142,31 @@ void execute_program(bool interactive_mode) {
 	if(interactive_mode) {
 
 	} else {
-
+		bool halt = false;
+		while(!halt) {
+			halt = execute_instruction();
+		}
 	}
+	std::cout << "Program terminated." << std::endl;
+}
+
+/* Currently supported modes: interactive and non-interactive. */
+bool handle_interactive(const std::string& int_string) {
+	if(int_string.length() != 1) {
+		std::cerr << "Invalid argument for interactive mode: " << int_string << std::endl;
+		exit(1);
+	}
+	bool interactive_mode;
+
+	if(int_string[0] == '0') interactive_mode = false;
+	if(int_string[0] == '1') interactive_mode = true;
+
+	if(interactive_mode != 0 && interactive_mode != 1) {
+		std::cerr << "Invalid argument for interactive mode: " << interactive_mode << std::endl;
+		exit(1);
+	}
+
+	return interactive_mode;
 }
 
 int main(int argc, char* argv[]) {
@@ -154,20 +177,13 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	/* Currently supported modes: interactive and non-interactive. */
-	bool interactive_mode = (bool) argv[2];
-	if(interactive_mode != 0 && interactive_mode != 1) {
-		std::cerr << "Invalid argument for interactive mode: " << interactive_mode << std::endl;
-		exit(1);
-	}
+	bool interactive_mode = handle_interactive(argv[2]);
 
 	std::string filename = argv[1];
 	load_program(filename);
 
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
 	execute_program(interactive_mode);
-
-	execute_instruction();
 
 	display_program();
 

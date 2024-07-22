@@ -99,7 +99,6 @@ void write_3_bytes(uint32_t address, uint32_t value);
 void write_2_bytes(uint32_t address, uint32_t value);
 void write_byte(uint32_t address, uint32_t value);
 
-uint32_t fetch_instruction();
-void execute_instruction();
+int execute_instruction();
 
 #endif
