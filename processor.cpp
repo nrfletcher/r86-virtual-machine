@@ -158,6 +158,10 @@ bool verify_safe_memory_access(uint32_t) {
     return false;
 }
 
+std::string opcode_to_string(uint32_t opcode) {
+    return "hey";
+}
+
 /** Main execution function that implements the fetch-decode-execute-memory-writeback cycle.
  *  Massive switch statement for now, could try to reduce this to a function pointer array later.
  *  Responsible for taking an instruction, and executing the appropriate
@@ -176,12 +180,12 @@ int execute_instruction() {
     uint32_t operand_1 = (instruction >> 5) & 0x1F;
     uint32_t operand_2 = (instruction) & 0x1F;
 
-    DEBUG_PRINT_V("Instruction: " << std::hex << std::setw(8) << std::setfill('0') << instruction);
-    DEBUG_PRINT_V("Current PC: 0x" << std::hex << std::setw(8) << std::setfill('0') << pc_reg);
-    DEBUG_PRINT_V("Opcode: 0x" << std::hex << std::setw(4) << std::setfill('0') << opcode);
-    DEBUG_PRINT_V("Flags: 0x" << std::hex << std::setw(4) << std::setfill('0') << flags);
-    DEBUG_PRINT_V("Operand 1: 0x" << std::hex << std::setw(4) << std::setfill('0') << operand_1);
-    DEBUG_PRINT_V("Operand 2: 0x" << std::hex << std::setw(4) << std::setfill('0') << operand_2);
+    DEBUG_PRINT_V("Instruction: 0x" << std::hex << std::setw(8) << std::setfill('0') << instruction);
+    DEBUG_PRINT_V("Current PC:  0x" << std::hex << std::setw(8) << std::setfill('0') << pc_reg);
+    DEBUG_PRINT_V("Opcode:      0x" << std::hex << std::setw(4) << std::setfill('0') << opcode << " -> " << opcode_to_string(opcode));
+    DEBUG_PRINT_V("Flags:       0x" << std::hex << std::setw(4) << std::setfill('0') << flags);
+    DEBUG_PRINT_V("Operand 1:   0x" << std::hex << std::setw(4) << std::setfill('0') << operand_1);
+    DEBUG_PRINT_V("Operand 2:   0x" << std::hex << std::setw(4) << std::setfill('0') << operand_2);
     DEBUG_PRINT_V("");
    
     /* Execute instruction. */
@@ -288,7 +292,7 @@ int execute_instruction() {
         case HALT_OPCODE:
             return 1;
         default:
-            std::cerr << "Invalid opcode: " << opcode << std::endl;
+            std::cerr << "Invalid opcode: " << std::hex << opcode << " at instruction: " << instruction << std::endl;
     }
     /* Return 0 for regular opcode. */
     return 0;
