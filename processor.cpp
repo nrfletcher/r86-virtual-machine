@@ -153,44 +153,36 @@ void write_byte(uint32_t address, uint32_t value) {
 /* GENERIC MEMORY READ AND WRITE FUNCTIONS */
 /* /////////////////////////////////////// */
 
-uint32_t fetch_instruction() {
-    uint32_t instruction = read_4_bytes(pc_reg);
-    pc_reg += 4;
-    return instruction;
-}
-
 /* Is the memory block we are attempting to access within program space. */
 bool verify_safe_memory_access(uint32_t) {
     return false;
 }
 
-/** Main execution function.
+/** Main execution function that implements the fetch-decode-execute-memory-writeback cycle.
  *  Massive switch statement for now, could try to reduce this to a function pointer array later.
  *  Responsible for taking an instruction, and executing the appropriate
     opcode depending on what the instruction provides. */ 
 void execute_instruction() {
-    uint32_t instruction = fetch_instruction();
+    /* Fetch instruction. */
+    uint32_t instruction = read_4_bytes(pc_reg);
+    pc_reg += 4;
     /* Used for any opcodes that require an immediate */
-    uint32_t immediate = fetch_instruction();
+    uint32_t immediate = read_4_bytes(pc_reg);
 
-    /* Extracting bits according to ISA specification. */
+    /* Decode. Extracting bits according to ISA specification. */
     uint32_t opcode = (instruction >> 14) & 0x3F;
     uint32_t flags = (instruction >> 10) & 0xF;
     uint32_t operand_1 = (instruction >> 5) & 0x1F;
     uint32_t operand_2 = (instruction) & 0x1F;
 
-    printf("Operand 1 %d\n", operand_1);
-    printf("Operand 2 %d\n", operand_2);
-    printf("Opcode: %d\n", opcode);
-
-
     DEBUG_PRINT_V("Instruction: " << std::hex << std::setw(8) << std::setfill('0') << instruction);
     DEBUG_PRINT_V("Current PC: 0x" << std::hex << std::setw(8) << std::setfill('0') << pc_reg);
-    DEBUG_PRINT_V("Opcode: " << std::hex << std::setw(4) << std::setfill('0') << opcode);
+    DEBUG_PRINT_V("Opcode: 0x" << std::hex << std::setw(4) << std::setfill('0') << opcode);
     DEBUG_PRINT_V("Flags: 0x" << std::hex << std::setw(4) << std::setfill('0') << flags);
-    DEBUG_PRINT_V("Operand 1: " << std::hex << std::setw(4) << std::setfill('0') << operand_1);
-    DEBUG_PRINT_V("Operand 2: " << std::hex << std::setw(4) << std::setfill('0') << operand_2);
+    DEBUG_PRINT_V("Operand 1: 0x" << std::hex << std::setw(4) << std::setfill('0') << operand_1);
+    DEBUG_PRINT_V("Operand 2: 0x" << std::hex << std::setw(4) << std::setfill('0') << operand_2);
    
+    /* Execute instruction. */
     switch (opcode) {
         case MOV_REG_REG_OPCODE:
             
@@ -202,34 +194,40 @@ void execute_instruction() {
             
             break;
         case MOV_REG_IMM_OPCODE:
-            
+            pc_reg += 4;
+
             break;
         case MOV_MEM_IMM_OPCODE:
-            
+            pc_reg += 4;
+
             break;
         case ADD_REG_REG_OPCODE:
             
             break;
         case ADD_REG_IMM_OPCODE:
-            
+            pc_reg += 4;
+
             break;
         case SUB_REG_REG_OPCODE:
             
             break;
         case SUB_REG_IMM_OPCODE:
-            
+            pc_reg += 4;
+
             break;
         case MUL_REG_REG_OPCODE:
             // mul_reg_reg();
             break;
         case MUL_REG_IMM_OPCODE:
-            // mul_reg_imm();
+            pc_reg += 4;
+
             break;
         case DIV_REG_REG_OPCODE:
             // div_reg_reg();
             break;
         case DIV_REG_IMM_OPCODE:
-            // div_reg_imm();
+            pc_reg += 4;
+
             break;
         case AND_REG_REG_OPCODE:
             // and_reg_reg();
