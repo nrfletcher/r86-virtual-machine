@@ -158,8 +158,12 @@ bool verify_safe_memory_access(uint32_t) {
     return false;
 }
 
-std::string opcode_to_string(uint32_t opcode) {
-    return "hey";
+std::string opcode_to_string(int opcode) {
+    if (opcode >= 0 && opcode < static_cast<int>(OPCODE_NAMES.size())) {
+        return OPCODE_NAMES[opcode];
+    } else {
+        return "UNKNOWN_OPCODE";
+    }
 }
 
 /** Main execution function that implements the fetch-decode-execute-memory-writeback cycle.
@@ -292,7 +296,7 @@ int execute_instruction() {
         case HALT_OPCODE:
             return 1;
         default:
-            std::cerr << "Invalid opcode: " << std::hex << opcode << " at instruction: " << instruction << std::endl;
+            std::cerr << "INVALID OPCODE: " << std::hex << opcode << " at instruction: " << instruction << std::endl;
     }
     /* Return 0 for regular opcode. */
     return 0;

@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <cstdint>
+#include <array>
 
 /* Supported opcodes. */
 enum Opcode {
@@ -43,6 +44,16 @@ enum Opcode {
     CMP_OPCODE,
     HALT_OPCODE,
     TEST_OPCODE,
+};
+
+const std::array<std::string, 33> OPCODE_NAMES = {
+    "MOV_REG_REG", "MOV_REG_MEM", "MOV_MEM_REG", "MOV_REG_IMM", "MOV_MEM_IMM",
+    "ADD_REG_REG", "ADD_REG_IMM", "SUB_REG_REG", "SUB_REG_IMM", "MUL_REG_REG",
+    "MUL_REG_IMM", "DIV_REG_REG", "DIV_REG_IMM", "AND_REG_REG", "OR_REG_REG",
+    "XOR_REG_REG", "NOT_REG", "SHL_REG", "SHR_REG", "JMP",
+    "JE", "JNE", "JLE", "JGE", "JG",
+    "JL", "PUSH", "POP", "CALL", "RET",
+    "CMP", "HALT", "TEST"
 };
 
 
