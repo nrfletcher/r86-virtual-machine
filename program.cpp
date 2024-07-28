@@ -183,9 +183,8 @@ int main(int argc, char* argv[]) {
 	load_program(filename);
 
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
-	execute_program(interactive_mode);
-
 	display_program();
+	execute_program(interactive_mode);
 
 	return EXIT_SUCCESS;
 }

@@ -67,10 +67,7 @@ enum TrapRoutine {
 
 /* Register identifiers. */
 enum Register {
-    PC_REGISTER = 0,
-    RSP_REGISTER,
-    RET_REGISTER,
-    REGISTER_0,
+    REGISTER_0 = 0,
     REGISTER_1,
     REGISTER_2,
     REGISTER_3,
@@ -86,6 +83,9 @@ enum Register {
     REGISTER_13,
     REGISTER_14,
     REGISTER_15,
+    PC_REGISTER,
+    RSP_REGISTER,
+    RET_REGISTER,
 };
 
 void display_registers();

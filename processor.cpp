@@ -10,10 +10,15 @@
 std::vector<uint8_t> memory(64 * 1024);
 
 /* All our registers are 32-bits wide. */
-uint32_t pc_reg = 0x0;
-uint32_t rsp_reg = 0x0;
-uint32_t ret_reg = 0x0;
-uint32_t general_registers[16];
+class RegisterFile {
+    public:
+        uint32_t pc_reg;
+        uint32_t rsp_reg;
+        uint32_t ret_reg;
+        uint32_t registers[16];
+};
+
+RegisterFile registerFile;
 
 /* Flags. */
 bool overflow_flag = 0;
@@ -24,43 +29,43 @@ bool zero_flag = 0;
 /* Set the beginning of our code segment and stack segment in memory. */
 void init_registers(uint32_t stack_begin, uint32_t program_begin) {
     DEBUG_PRINT_V("Stack begin: " << std::hex << stack_begin << " Program begin: " << program_begin);
-    rsp_reg = stack_begin;
-    pc_reg = program_begin;
+    registerFile.rsp_reg = stack_begin;
+    registerFile.pc_reg = program_begin;
 }
 
 /* GETTERS AND SETTERS FOR REGISTERS */
 /* ///////////////////////////////// */
 
 uint32_t get_pc() {
-    return pc_reg;
+    return registerFile.pc_reg;
 }
 
 void set_pc(uint32_t val) {
-    pc_reg = val;
+    registerFile.pc_reg = val;
 }
 
 uint32_t get_rsp() {
-    return rsp_reg;
+    return registerFile.rsp_reg;
 }
 
 void set_rsp(uint32_t val) {
-    rsp_reg = val;
+    registerFile.rsp_reg = val;
 }
 
 uint32_t get_ret() {
-    return ret_reg;
+    return registerFile.ret_reg;
 }
 
 void set_ret(uint32_t val) {
-    ret_reg = val;
+    registerFile.ret_reg = val;
 }
 
 uint32_t get_register(int reg) {
-    return general_registers[reg];
+    return registerFile.registers[reg];
 }
 
 void set_register(int reg, uint32_t val) {
-    general_registers[reg] = val;
+    registerFile.registers[reg] = val;
 }
 
 /* GETTERS AND SETTERS FOR REGISTERS */
@@ -68,28 +73,28 @@ void set_register(int reg, uint32_t val) {
 
 void display_registers() {
     printf("PC:  0x%04X  RSP: 0x%04X  RT:  0x%04X  R0:  0x%04X  R1:  0x%04X R2: 0x%04X  R3:  0x%04X\n", 
-        pc_reg, rsp_reg, ret_reg, general_registers[0], general_registers[1], general_registers[2], general_registers[4]);
+        registerFile.pc_reg, registerFile.rsp_reg, registerFile.ret_reg, registerFile.registers[0], registerFile.registers[1], registerFile.registers[2], registerFile.registers[4]);
     printf("R4:  0x%04X  R5:  0x%04X  R6:  0x%04X  R7:  0x%04X  R8:  0x%04X R9: 0x%04X  R10: 0x%04X\n", 
-        general_registers[5], general_registers[6], general_registers[7], general_registers[8], general_registers[9], general_registers[10], general_registers[11]);
+        registerFile.registers[5], registerFile.registers[6], registerFile.registers[7], registerFile.registers[8], registerFile.registers[9], registerFile.registers[10], registerFile.registers[11]);
     printf("R11: 0x%04X  R12: 0x%04X  R13: 0x%04X  R14: 0x%04X  R15: 0x%04X\n", 
-        general_registers[12], general_registers[13], general_registers[14], general_registers[15], general_registers[16]);
+        registerFile.registers[12], registerFile.registers[13], registerFile.registers[14], registerFile.registers[15], registerFile.registers[16]);
     std::cout << std::endl;
 }
 
 void display_register(uint32_t reg) {
     switch(reg) {
         case PC_REGISTER:
-            printf("PC: 0x%04X\n", pc_reg);
+            printf("PC: 0x%04X\n", registerFile.pc_reg);
             break;
         case RET_REGISTER:
-            printf("RET: 0x%04X\n", ret_reg);
+            printf("RET: 0x%04X\n", registerFile.ret_reg);
             break;
         case RSP_REGISTER:
-            printf("RET: 0x%04X\n", rsp_reg);
+            printf("RET: 0x%04X\n", registerFile.rsp_reg);
             break;
         default:
             if(reg <= REGISTER_15 && reg >= REGISTER_0) {
-                printf("R%d: 0x%04X\n", reg, general_registers[reg]);
+                printf("R%d: 0x%04X\n", reg, registerFile.registers[reg]);
                 return;
             } else {
                 std::cerr << "Invalid register: " << reg << std::endl;
@@ -173,10 +178,10 @@ std::string opcode_to_string(int opcode) {
     We return 0 for all opcodes, except HALT which returns 1. */ 
 int execute_instruction() {
     /* Fetch instruction. */
-    uint32_t instruction = read_4_bytes(pc_reg);
-    pc_reg += 4;
+    uint32_t instruction = read_4_bytes(registerFile.pc_reg);
+    registerFile.pc_reg += 4;
     /* Used for any opcodes that require an immediate */
-    uint32_t immediate = read_4_bytes(pc_reg);
+    uint32_t immediate = read_4_bytes(registerFile.pc_reg);
 
     /* Decode. Extracting bits according to ISA specification. */
     uint32_t opcode = (instruction >> 14) & 0x3F;
@@ -185,7 +190,7 @@ int execute_instruction() {
     uint32_t operand_2 = (instruction) & 0x1F;
 
     DEBUG_PRINT_V("Instruction: 0x" << std::hex << std::setw(8) << std::setfill('0') << instruction);
-    DEBUG_PRINT_V("Current PC:  0x" << std::hex << std::setw(8) << std::setfill('0') << pc_reg);
+    DEBUG_PRINT_V("Current PC:  0x" << std::hex << std::setw(8) << std::setfill('0') << registerFile.pc_reg);
     DEBUG_PRINT_V("Opcode:      0x" << std::hex << std::setw(4) << std::setfill('0') << opcode << " -> " << opcode_to_string(opcode));
     DEBUG_PRINT_V("Flags:       0x" << std::hex << std::setw(4) << std::setfill('0') << flags);
     DEBUG_PRINT_V("Operand 1:   0x" << std::hex << std::setw(4) << std::setfill('0') << operand_1);
@@ -195,7 +200,7 @@ int execute_instruction() {
     /* Execute instruction. */
     switch (opcode) {
         case MOV_REG_REG_OPCODE:
-            
+            if(operand_1 == RSP_REGISTER) 
             break;
         case MOV_REG_MEM_OPCODE:
             
@@ -204,39 +209,39 @@ int execute_instruction() {
             
             break;
         case MOV_REG_IMM_OPCODE:
-            pc_reg += 4;
+            registerFile.pc_reg += 4;
 
             break;
         case MOV_MEM_IMM_OPCODE:
-            pc_reg += 4;
+            registerFile.pc_reg += 4;
 
             break;
         case ADD_REG_REG_OPCODE:
             
             break;
         case ADD_REG_IMM_OPCODE:
-            pc_reg += 4;
+            registerFile.pc_reg += 4;
 
             break;
         case SUB_REG_REG_OPCODE:
             
             break;
         case SUB_REG_IMM_OPCODE:
-            pc_reg += 4;
+            registerFile.pc_reg += 4;
 
             break;
         case MUL_REG_REG_OPCODE:
             // mul_reg_reg();
             break;
         case MUL_REG_IMM_OPCODE:
-            pc_reg += 4;
+            registerFile.pc_reg += 4;
 
             break;
         case DIV_REG_REG_OPCODE:
             // div_reg_reg();
             break;
         case DIV_REG_IMM_OPCODE:
-            pc_reg += 4;
+            registerFile.pc_reg += 4;
 
             break;
         case AND_REG_REG_OPCODE:
