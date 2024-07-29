@@ -235,34 +235,64 @@ int execute_instruction() {
             }
             break;
         case SUB_REG_REG_OPCODE:
-            registerFile.registers[operand_1] -= registerFile.registers[operand_2];
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(registerFile.registers[operand_2]);
+            value1 -= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case SUB_REG_IMM_OPCODE:
             registerFile.registers[PC_REGISTER] += 4;
 
             break;
         case MUL_REG_REG_OPCODE:
-            // mul_reg_reg();
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(registerFile.registers[operand_2]);
+            value1 *= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case MUL_REG_IMM_OPCODE:
             registerFile.registers[PC_REGISTER] += 4;
 
             break;
         case DIV_REG_REG_OPCODE:
-            // div_reg_reg();
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(registerFile.registers[operand_2]);
+            value1 /= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case DIV_REG_IMM_OPCODE:
             registerFile.registers[PC_REGISTER] += 4;
 
             break;
         case AND_REG_REG_OPCODE:
-            // and_reg_reg();
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(registerFile.registers[operand_2]);
+            value1 &= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case OR_REG_REG_OPCODE:
-            // or_reg_reg();
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(registerFile.registers[operand_2]);
+            value1 |= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case XOR_REG_REG_OPCODE:
-            // xor_reg_reg();
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(registerFile.registers[operand_2]);
+            value1 ^= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case NOT_REG_OPCODE:
             // not_reg();
