@@ -4,6 +4,7 @@ ISA supports 32-bit von-Neumann architecture with big endian byte encoding
 Supported Architecture
 * 32-bit instruction length
 * 32-bit immediate value if specified by opcode
+* All data movements are currently 32-bit, if one wishes to work with smaller values they must utilize bitwise supported operations.
 
 Instruction Format
 * [TOP 12 BITS UNUSED] [NEXT 6 OPCODE] [NEXT 4 OPCODE FLAGS] [NEXT 5 OPERAND X] [NEXT 5 OPERAND Y]
@@ -36,12 +37,12 @@ Supported Opcodes
 * SHL REG, AMT       | OPCODE 17 | performs a shift left of AMT on REG
 * SHR REG, AMT       | OPCODE 18 | performs a shift right of AMT on REG
 * JMP ADDRESS        | OPCODE 19 | performs an unconditional jump to ADDRESS
-* JE  ADDRESS        | OPCODE 20 | performs a conditional jump if 
-* JNE ADDRESS        | OPCODE 21 | performs a conditional jump if 
-* JLE ADDRESS        | OPCODE 22 | performs a conditional jump if 
-* JGE ADDRESS        | OPCODE 23 | performs a conditional jump if 
-* JG  ADDRESS        | OPCODE 24 | performs a conditional jump if 
-* JL  ADDRESS        | OPCODE 25 | performs a conditional jump if
+* JE  ADDRESS        | OPCODE 20 | performs a conditional jump to address in REGX if 
+* JNE ADDRESS        | OPCODE 21 | performs a conditional to address in REGX if
+* JLE ADDRESS        | OPCODE 22 | performs a conditional to address in REGX if 
+* JGE ADDRESS        | OPCODE 23 | performs a conditional to address in REGX if 
+* JG  ADDRESS        | OPCODE 24 | performs a conditional to address in REGX if 
+* JL  ADDRESS        | OPCODE 25 | performs a conditional to address in REGX if
 * PUSH REG           | OPCODE 26 | pushes content of REG onto the stack
 * POP REG            | OPCODE 27 | pops the content of the RSP into REG
 * CALL ADDRESS       | OPCODE 28 | jumps to ADDRESS, and pushes ADDRESS + 1 onto the stack
