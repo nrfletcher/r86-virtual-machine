@@ -12,6 +12,7 @@
 #include "strings.h"
 
 uint32_t prog_instruction_count = 0;
+uint32_t executed_instructions = 0;
 
 void memread(uint32_t addr, uint32_t num_bytes) {
 	switch(num_bytes) {
@@ -138,9 +139,45 @@ void load_program(const std::string& filename) {
 	MyReadFile.close();
 }
 
-/* Handle a given command in interactive mode */
-bool handle_command(const std::vector<std::string> tokens) {
+/* COMMAND HANDLING FUNCTIONS */
 
+bool handle_step(const std::vector<std::string> tokens) {
+	return execute_instruction();
+}
+
+bool handle_reg(const std::vector<std::string> tokens) {
+	if(tokens.size() == 1) {
+		display_registers();
+	} else {
+		for(size_t arg = 0; arg < tokens.size(); arg++) {
+			// display_register()
+		}
+	}
+}
+
+bool handle_mem(const std::vector<std::string> tokens) {
+
+}
+
+/* END COMMAND HANDLING FUNCTIONS */
+
+/* Handle a given command in interactive mode 
+	Current supported commands: reg, mem, step, end */
+bool handle_command(const std::vector<std::string> tokens) {
+	/* First, handle first token */
+	if(tokens[0] == "step") {
+		executed_instructions++;
+		return handle_step(tokens);
+	} else if(tokens[0] == "reg") {
+		return handle_reg(tokens);
+	} else if(tokens[0] == "mem") {
+		return handle_mem(tokens);
+	} else if(tokens[0] == "end") {
+		std::cout << "Exiting program early. Total instructions: " << prog_instruction_count << " Executed instructions: " << executed_instructions << std::endl;
+		return true;
+	}
+	print("Unknown command, try: mem, reg, step, end");
+	return false;
 }
 
 /* Allows user to step through program and read variables for debugging purposes 
@@ -148,7 +185,7 @@ bool handle_command(const std::vector<std::string> tokens) {
 void handle_interactive_mode() {
 	std::string command;
 	bool halt = false;
-	while(command != "end" || halt) {
+	while(command != "end" || !halt) {
 		std::cout << "Command: ";
 		std::getline(std::cin, command);
 		std::vector<std::string> tokens = split_string(command);
@@ -165,6 +202,7 @@ void execute_program(bool interactive_mode) {
 		bool halt = false;
 		while(!halt) {
 			halt = execute_instruction();
+			executed_instructions++;
 		}
 	}
 	std::cout << "Program terminated." << std::endl;
