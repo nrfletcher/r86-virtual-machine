@@ -190,6 +190,7 @@ bool handle_interactive(const std::string& int_string) {
 }
 
 int main(int argc, char* argv[]) {
+	print("Welcome to the program");
 	/* User needs to provide a program file to run and a choice of execution mode. */
 	if(argc < 3) {
 		std::cerr << "Usage: " << argv[0] << " <filename> <interactive>" << std::endl;

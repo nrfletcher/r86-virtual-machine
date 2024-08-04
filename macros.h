@@ -1,8 +1,8 @@
 #ifndef MACROS_H
 #define MACROS_H
 
-#define DEBUG 0 // Enable to print basic debugging statements.
-#define DEBUG_V 0 // Enable to print verbose debugging statements.
+#define DEBUG 1 // Enable to print basic debugging statements.
+#define DEBUG_V 1 // Enable to print verbose debugging statements.
 
 #if DEBUG
     #define DEBUG_PRINT(x) std::cout << x << std::endl
