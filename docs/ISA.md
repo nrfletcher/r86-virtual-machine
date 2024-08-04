@@ -8,7 +8,7 @@ Supported Architecture
 
 Instruction Format
 * [TOP 12 BITS UNUSED] [NEXT 6 OPCODE] [NEXT 4 OPCODE FLAGS] [NEXT 5 OPERAND X] [NEXT 5 OPERAND Y]
-* 5 bits for two operand definers (two registers, 32 possibilities) each (10 bits total)
+* 6 bits for two operand definers (two registers, 64 possibilities) each (10 bits total)
 * 6 opcode bits (64 total opcodes available)
 * 32 bit for an immediate (meaning a max value of 2^32 and a max address of 2^32)
 * 4 opcode flags for future additional functionality built in later

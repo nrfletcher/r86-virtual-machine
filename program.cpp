@@ -4,10 +4,12 @@
 #include <fstream>
 #include <stdexcept>
 #include <cstdint>
+#include <vector>
 
 #include "program.h"
 #include "processor.h"
 #include "macros.h"
+#include "strings.h"
 
 uint32_t prog_instruction_count = 0;
 
@@ -136,11 +138,33 @@ void load_program(const std::string& filename) {
 	MyReadFile.close();
 }
 
+/* Allows user to step through program and read variables for debugging purposes 
+	This is probably going to end up quite a mess from all the string parsing */
+void handle_interactive_mode() {
+	std::string command;
+	while(command != "end") {
+		std::cout << "Command: ";
+		std::cin >> command;
+		// Handle command
+		if(command == "end") {
+			return;
+		}
+		else if(command == "") {
+
+		} else {
+			std::vector<std::string> tokens = split_string(command);
+			for(int i = 0; i < tokens.size(); i++) {
+				std::cout << tokens[i] << std::endl;
+			}
+		}
+	}
+}
+
 void execute_program(bool interactive_mode) {
 	/* Interactive mode allows user to step through code 
 	   Otherwise, we execute the entire program */
 	if(interactive_mode) {
-
+		handle_interactive_mode();
 	} else {
 		bool halt = false;
 		while(!halt) {
