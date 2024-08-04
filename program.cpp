@@ -108,7 +108,7 @@ void load_program(const std::string& filename) {
 	std::string line;
 	// For each line, parse the instruction and ensure it is a valid length string
 	while(getline(MyReadFile, line)) {
-		std::cout << line << std::endl;
+		DEBUG_PRINT(line);
 		std::string instruction;
 
 		for(char& c : line) {
@@ -138,25 +138,21 @@ void load_program(const std::string& filename) {
 	MyReadFile.close();
 }
 
+/* Handle a given command in interactive mode */
+bool handle_command(const std::vector<std::string> tokens) {
+
+}
+
 /* Allows user to step through program and read variables for debugging purposes 
 	This is probably going to end up quite a mess from all the string parsing */
 void handle_interactive_mode() {
 	std::string command;
-	while(command != "end") {
+	bool halt = false;
+	while(command != "end" || halt) {
 		std::cout << "Command: ";
-		std::cin >> command;
-		// Handle command
-		if(command == "end") {
-			return;
-		}
-		else if(command == "") {
-
-		} else {
-			std::vector<std::string> tokens = split_string(command);
-			for(int i = 0; i < tokens.size(); i++) {
-				std::cout << tokens[i] << std::endl;
-			}
-		}
+		std::getline(std::cin, command);
+		std::vector<std::string> tokens = split_string(command);
+		halt = handle_command(tokens);
 	}
 }
 
@@ -207,7 +203,11 @@ int main(int argc, char* argv[]) {
 	load_program(filename);
 
 	init_registers(STACK_SEGMENT_BEGIN, TEXT_SEGMENT_BEGIN);
+
+	#if DEBUG
 	display_program();
+	#endif
+
 	execute_program(interactive_mode);
 
 	return EXIT_SUCCESS;
