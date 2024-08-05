@@ -2,6 +2,9 @@
 #include <cstdint>
 #include <vector>
 #include <iomanip>
+#include <unordered_map>
+#include <algorithm>
+#include <stdexcept>
 
 #include "processor.h"
 #include "macros.h"
@@ -20,6 +23,39 @@ class RegisterFile {
 };
 
 RegisterFile registerFile;
+
+const std::unordered_map<std::string, int> RegisterParser::registerMap = {
+    {"R0", REGISTER_0},
+    {"R1", REGISTER_1},
+    {"R2", REGISTER_2},
+    {"R3", REGISTER_3},
+    {"R4", REGISTER_4},
+    {"R5", REGISTER_5},
+    {"R6", REGISTER_6},
+    {"R7", REGISTER_7},
+    {"R8", REGISTER_8},
+    {"R9", REGISTER_9},
+    {"R10", REGISTER_10},
+    {"R11", REGISTER_11},
+    {"R12", REGISTER_12},
+    {"R13", REGISTER_13},
+    {"R14", REGISTER_14},
+    {"R15", REGISTER_15},
+    {"PC", PC_REGISTER},
+    {"RSP", RSP_REGISTER},
+    {"RET", RET_REGISTER}
+};
+
+int RegisterParser::parse_register(const std::string& input) {
+    std::string upperInput = input;
+    std::transform(upperInput.begin(), upperInput.end(), upperInput.begin(), ::toupper);
+    
+    try {
+        return registerMap.at(upperInput);
+    } catch (const std::out_of_range&) {
+        throw std::invalid_argument("Invalid register name: " + input);
+    }
+}
 
 /* Flags. */
 bool overflow_flag = 0;
@@ -91,7 +127,7 @@ void display_register(uint32_t reg) {
             printf("RET: 0x%04X\n", registerFile.registers[RET_REGISTER]);
             break;
         case RSP_REGISTER:
-            printf("RET: 0x%04X\n", registerFile.registers[RSP_REGISTER]);
+            printf("RSP: 0x%04X\n", registerFile.registers[RSP_REGISTER]);
             break;
         default:
             if(reg <= REGISTER_15 && reg >= REGISTER_0) {

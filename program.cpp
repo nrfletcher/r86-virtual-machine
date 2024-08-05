@@ -141,7 +141,7 @@ void load_program(const std::string& filename) {
 
 /* COMMAND HANDLING FUNCTIONS */
 
-bool handle_step(const std::vector<std::string> tokens) {
+bool handle_step() {
 	return execute_instruction();
 }
 
@@ -149,8 +149,12 @@ bool handle_reg(const std::vector<std::string> tokens) {
 	if(tokens.size() == 1) {
 		display_registers();
 	} else {
-		for(size_t arg = 0; arg < tokens.size(); arg++) {
-			// display_register()
+		for(size_t arg = 1; arg < tokens.size(); arg++) {
+			try {
+				display_register(RegisterParser::parse_register(tokens[arg]));
+			} catch(const std::invalid_argument& e) {
+				std::cerr << "Error: " << e.what() << std::endl;
+			}
 		}
 	}
 }
@@ -167,7 +171,7 @@ bool handle_command(const std::vector<std::string> tokens) {
 	/* First, handle first token */
 	if(tokens[0] == "step") {
 		executed_instructions++;
-		return handle_step(tokens);
+		return handle_step();
 	} else if(tokens[0] == "reg") {
 		return handle_reg(tokens);
 	} else if(tokens[0] == "mem") {
@@ -185,7 +189,7 @@ bool handle_command(const std::vector<std::string> tokens) {
 void handle_interactive_mode() {
 	std::string command;
 	bool halt = false;
-	while(command != "end" || !halt) {
+	while(command != "end" && !halt) {
 		std::cout << "Command: ";
 		std::getline(std::cin, command);
 		std::vector<std::string> tokens = split_string(command);

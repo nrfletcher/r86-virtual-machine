@@ -8,6 +8,7 @@
 #include <vector>
 #include <cstdint>
 #include <array>
+#include <unordered_map>
 
 /* Supported opcodes. */
 enum Opcode {
@@ -88,6 +89,14 @@ enum Register {
     RET_REGISTER,
 };
 
+class RegisterParser {
+    private:
+        static const std::unordered_map<std::string, int> registerMap;
+
+    public:
+        static int parse_register(const std::string& input);
+};
+
 void display_registers();
 void display_register(uint32_t reg);
 void init_registers(uint32_t stack_begin, uint32_t program_begin);
@@ -111,5 +120,6 @@ void write_2_bytes(uint32_t address, uint32_t value);
 void write_byte(uint32_t address, uint32_t value);
 
 int execute_instruction();
+uint32_t string_to_register(const std::string& reg);
 
 #endif
