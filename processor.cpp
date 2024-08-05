@@ -280,7 +280,12 @@ int execute_instruction() {
             break;
         case SUB_REG_IMM_OPCODE:
             registerFile.registers[PC_REGISTER] += 4;
-
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(immediate);
+            value1 -= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case MUL_REG_REG_OPCODE:
             {
@@ -292,7 +297,12 @@ int execute_instruction() {
             break;
         case MUL_REG_IMM_OPCODE:
             registerFile.registers[PC_REGISTER] += 4;
-
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(immediate);
+            value1 *= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case DIV_REG_REG_OPCODE:
             {
@@ -304,7 +314,12 @@ int execute_instruction() {
             break;
         case DIV_REG_IMM_OPCODE:
             registerFile.registers[PC_REGISTER] += 4;
-
+            {
+            int32_t value1 = static_cast<int32_t>(registerFile.registers[operand_1]);
+            int32_t value2 = static_cast<int32_t>(immediate);
+            value1 /= value2;
+            registerFile.registers[operand_1] = static_cast<uint32_t>(value1); 
+            }
             break;
         case AND_REG_REG_OPCODE:
             {
