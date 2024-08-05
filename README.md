@@ -53,4 +53,5 @@ Reg allows you to display either all registers by providing no argument, or a li
 ```bash
 end
 ```
+End terminates the program regardless of it's current state. It is the equivalent of forcing the PC to jump to a halt instruction.
 
