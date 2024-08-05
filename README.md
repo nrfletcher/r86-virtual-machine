@@ -2,12 +2,12 @@
 <a name="readme-top"></a>
   
 # ✳️ r86 Virtual Machine
-A minimal LC-3 and x86 based virtual machine.
+A minimal LC-3 and x86 based virtual machine
 
 </div>
 
 ## Overview
-r86 aims to be a simplistic, navigable, and educational virtual machine that offers a casual experience of running machine code instructions to emulate a processor. r86 plans to come with a program loader, debugging tools, and assembler.
+r86 is a simplistic, navigable, and educational virtual machine that offers a casual experience of running machine code instructions to emulate a processor. r86 currently supports a wide range of instructions, a program loader, a GDB-esque debugger, and has future plans to support an assembler.
 
 ## How To Load Machine Code Program
 If you would like to run a program using machine code:
@@ -16,6 +16,12 @@ If you would like to run a program using machine code:
 * Immediates should go on a new line
 * Individual bits can be seperated by whitespace (loader will ignore this)
 * Lines can end with comments denoted by //, anything after is ignored by loaders
+
+## Instruction Set Architecture
+An r86 instruction is encoded as 32 bits.
+
+## Opcodes
+The following are the currently supported opcodes, as well as their associated values and arguments.
 
 ## Registers
 r86 provides the following registers:
