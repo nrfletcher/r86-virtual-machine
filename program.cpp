@@ -162,16 +162,16 @@ bool handle_reg(const std::vector<std::string> tokens) {
 }
 
 bool handle_mem(const std::vector<std::string> tokens) {
-	if(tokens.size() < 3) return false;
-	try {
-		if (tokens[1] == "regions") {
-			std::cout << "Stack begin" << std::endl;
-			std::cout << "Heap begin" << std::endl;
-			std::cout << "BSS segment" << std::endl;
-			std::cout << "Data segment" << std::endl;
-			std::cout << "Text segment" << std::endl;
+	if (tokens[1] == "regions" && tokens.size() == 2) {
+			std::cout << "Stack begin: " << STACK_SEGMENT_BEGIN << " end: " << STACK_SEGMENT_END << std::endl;
+			std::cout << "Heap begin: " << HEAP_SEGMENT_BEGIN << " end: " << HEAP_SEGMENT_END << std::endl;
+			std::cout << "BSS segment: " << BSS_SEGMENT_BEGIN << " end: " << BSS_SEGMENT_END << std::endl;
+			std::cout << "Data segment: " << DATA_SEGMENT_BEGIN << " end: " << DATA_SEGMENT_END << std::endl;
+			std::cout << "Text segment: " << TEXT_SEGMENT_BEGIN << " end: " << TEXT_SEGMENT_END << std::endl;
 			return false;
 		}
+	if(tokens.size() < 3) return false;
+	try {
 		uint32_t addr = string_to_int32(tokens[1]);
 		uint32_t blocks = string_to_int32(tokens[2]);
 		if (addr < TEXT_SEGMENT_BEGIN || addr > STACK_SEGMENT_BEGIN) {
