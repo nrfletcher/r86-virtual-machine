@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string_view>
 #include <iostream>
+#include <cstdint>
 
 /* Takes delimiter, returns vector of strings split on that delimiter */
 std::vector<std::string> split_string(const std::string& s, char delimiter = ' ') {
@@ -29,4 +30,8 @@ void print_vector(const std::vector<std::string> strings) {
     for(auto &s: strings) {
         print(s);
     }
+}
+
+uint32_t string_to_int32(const std::string& str) {
+    return static_cast<uint32_t>(std::stoul(str, nullptr, 0));
 }

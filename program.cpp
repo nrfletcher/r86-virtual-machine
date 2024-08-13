@@ -160,7 +160,13 @@ bool handle_reg(const std::vector<std::string> tokens) {
 }
 
 bool handle_mem(const std::vector<std::string> tokens) {
-
+	if(tokens.size() == 0) return true;
+	try {
+		uint32_t addr = string_to_int32(tokens[1]);
+		uint32_t count = string_to_int32(tokens[2]);
+	} catch(const std::invalid_argument& e) {
+		std::cerr << "Error, invalid memory argument: " << e.what() << std::endl;
+	}
 }
 
 /* END COMMAND HANDLING FUNCTIONS */
