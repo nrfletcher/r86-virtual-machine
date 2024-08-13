@@ -148,6 +148,7 @@ bool handle_step() {
 bool handle_reg(const std::vector<std::string> tokens) {
 	if(tokens.size() == 1) {
 		display_registers();
+		return false;
 	} else {
 		for(size_t arg = 1; arg < tokens.size(); arg++) {
 			try {
@@ -156,17 +157,33 @@ bool handle_reg(const std::vector<std::string> tokens) {
 				std::cerr << "Error: " << e.what() << std::endl;
 			}
 		}
+		return false;
 	}
 }
 
 bool handle_mem(const std::vector<std::string> tokens) {
-	if(tokens.size() == 0) return true;
+	if(tokens.size() < 3) return false;
 	try {
+		if (tokens[1] == "regions") {
+			std::cout << "Stack begin" << std::endl;
+			std::cout << "Heap begin" << std::endl;
+			std::cout << "BSS segment" << std::endl;
+			std::cout << "Data segment" << std::endl;
+			std::cout << "Text segment" << std::endl;
+			return false;
+		}
 		uint32_t addr = string_to_int32(tokens[1]);
-		uint32_t count = string_to_int32(tokens[2]);
+		uint32_t blocks = string_to_int32(tokens[2]);
+		if (addr < TEXT_SEGMENT_BEGIN || addr > STACK_SEGMENT_BEGIN) {
+			std::cerr << "Invalid memory address, out of bounds: " << addr << std::endl;
+			return false;
+		}
+		display_memory(addr, blocks);
+		return false;
 	} catch(const std::invalid_argument& e) {
 		std::cerr << "Error, invalid memory argument: " << e.what() << std::endl;
 	}
+	return false;
 }
 
 /* END COMMAND HANDLING FUNCTIONS */
